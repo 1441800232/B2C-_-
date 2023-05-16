@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Chen </title>
+
+    <meta name="description" content="Dashboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Basic Styles-->
+    <link href="__admin__/style/bootstrap.css" rel="stylesheet">
+    <link href="__admin__/style/font-awesome.css" rel="stylesheet">
+    <link href="__admin__/style/style/weather-icons.css" rel="stylesheet">
+
+
+    <!--Beyond styles-->
+    <link id="beyond-link" href="__admin__/style/beyond.css" rel="stylesheet" type="text/css">
+    <link href="__admin__/style/demo.css" rel="stylesheet">
+    <link href="__admin__/style/typicons.css" rel="stylesheet">
+    <link href="__admin__/style/animate.css" rel="stylesheet">
+
+</head>
+
+<body>
+<!-- 头部 -->
+{include file='common/top'}
+<!-- /头部 -->
+
+<div class="main-container container-fluid">
+    <div class="page-container">
+        <!-- Page Sidebar 左侧-->
+        {include file='common/left'}
+        <!-- /Page Sidebar -->
+        <!-- Page Content -->
+        <div class="page-content">
+            <!-- Page Breadcrumb -->
+            <div class="page-breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <!--
+                     :url （'控制器/和方法'）
+                     转跳到首页
+                       -->
+                        <a href="{:url('Index/index')}">系统</a>
+                    </li>
+                    <li class="active">商品库存管理</li>
+                </ul>
+            </div>
+            <!-- /Page Breadcrumb -->
+            <!-- Page Body -->
+            <div class="page-body">
+                <button type="button" tooltip="添加商品类型"
+                        class="btn btn-sm btn-azure btn-addon"
+                        onClick="javascript:window.location.href = '{:url('goods/add')}'">
+                    <i class="fa fa-plus"></i> Add
+                </button>
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <div class="widget">
+                            <div class="widget-body">
+                                <form action="" method="post">
+                                    <div class="flip-scroll">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                {volist name='radioRes' id='radioAttr'}
+                                                <th class="text-center" width="9%">{$key}</th>
+                                                {/volist}
+                                                <th class="text-center" width="9%">库存量</th>
+                                                <th class="text-center" width="10%">操作</th>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            <!--!如果有值的话就就循环显示出现-->
+                                            <?php if($goodsProRes):
+                                              foreach($goodsProRes as $k0 => $v0):
+
+                                            ?>
+                                            <tr>
+                                                <?php foreach($radioRes as $k=>$v):?>
+                                                <td align="center">
+                                                    <select name="goods_attr[{$k}][]">
+                                                        <option value="">请选择</option>
+                                                        <!--
+                                                        我们先要把这个字符串打散成一个数组
+                                                        我们首先要拆分$v0里面的goods_attr
+                                                        explode — 使用一个字符串分割另一个字符串
+                                                        开始判断 如果$v1 的id（$v1['id']）在字符串里面
+                                                        说明当前的选项属于选定的状态$select='selected="selected"';
+                                                        否则就是不选中$select='';
+                                                        判读他的字符串 $v1的id是否在这个字符串里面-->
+                                                        <?php foreach($v as $k1 => $v1):
+                                                        $arr=explode(',',$v0['goods_attr']);
+                                                        if(in_array($v1['id'],$arr)){
+                                                           $select='selected="selected"';
+                                                        }else{
+                                                           $select='';
+                                                        }
+                                                        ?>
+                                                        <!--在这里就把 $select 显示出来-->
+                                                        <option <?php echo $select;?> value="<?php echo $v1['id'];?>"><?php echo $v1['attr_value'];?></option>
+                                                        <?php endforeach;?>
+                                                    </select>
+                                                </td>
+                                                <?php endforeach?>
+                                                <td align="center"><input type="text" name="goods_num[]" style="text-align: center;"  value="<?php echo $v0['goods_number'];?>" ></td>
+                                                <td align="center"><a onclick="addtr(this);" class="btn btn-sm btn-azure btn-addon" href="javascript:;"><?php if($k0==0){echo '加'; }else{echo '减'; }?></a>
+                                            </tr>
+                                            <?PHP endforeach; else:?>
+                                            <tr>
+                                                <?php foreach($radioRes as $k=>$v):?>
+                                                <td align="center">
+                                                    <select name="goods_attr[{$k}][]">
+                                                        <option value="">请选择</option>
+                                                        <?php foreach($v as $k1 => $v1):?>
+                                                        <option value="<?php echo $v1['id'];?>"><?php echo $v1['attr_value'];?></option>
+                                                        <?php endforeach;?>
+                                                    </select>
+                                                </td>
+                                                <?php endforeach?>
+                                                <td align="center"><input type="text" name="goods_num[]" style="text-align: center;"  value="" ></td>
+                                                <td align="center"><a onclick="addtr(this);" class="btn btn-sm btn-azure btn-addon" href="javascript:;">加</a>
+                                            </tr>
+                                            <?php endif;?>
+                                            </tbody>
+                                        </table>
+
+                                        <div style="height: 35px;" class="text-right">
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-default">保存信息</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- render 分页-->
+
+                                    <div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+        </div>
+    </div>
+</div>
+
+    <!--Basic Scripts-->
+    <script src="__admin__/style/jquery_002.js"></script>
+    <script src="__admin__/style/bootstrap.js"></script>
+    <script src="__admin__/style/jquery.js"></script>
+    <!--Beyond Scripts-->
+    <script src="__admin__/style/beyond.js"></script>
+    <script type="text/javascript">
+        // html+='';
+        // html+="<div class='col-sm--6'><a class='btn btn-sm btn-azure btn-addon ' href='#'> <i class=fa 'fa-plus'></i>增加</a>";
+
+        //addrow方法可以对select加一对减一
+        function addtr(o) {
+            //定义最外层的div 他下面的副记标签的父记标签 parent()就是父记标签的意思是
+            var tr = $(o).parent().parent();
+            if ($(o).html() == '加') {
+                //clone()函数就复制克隆
+                var newtr = tr.clone();//clone是克隆方法，克隆方法生成被选元素的副本，包含子节点、文本和属性。
+                newtr.find('a').html('减');//利用find函数去查询到newdiv里的a标签，在利用html把a标签里面的'+'修改成'-'
+                tr.after(newtr);
+            } else {
+                //remove函数
+                //方法移除被选元素，包括所有的文本和子节点。
+                // 该方法也会移除被选元素的数据和事件。
+                //删除所有匹配的元素。
+                tr.remove();
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title> </title>
+
+    <meta name="description" content="Dashboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Basic Styles-->
+    <link href="__admin__/style/bootstrap.css" rel="stylesheet">
+    <link href="__admin__/style/font-awesome.css" rel="stylesheet">
+    <link href="__admin__/style/weather-icons.css" rel="stylesheet">
+
+
+    <!--Beyond styles-->
+    <link id="beyond-link" href="__admin__/style/beyond.css" rel="stylesheet" type="text/css">
+    <link href="__admin__/style/demo.css" rel="stylesheet">
+    <link href="__admin__/style/typicons.css" rel="stylesheet">
+    <link href="__admin__/style/animate.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- 头部 -->
+    {include file='common/top'}
+    <!-- /头部 -->
+
+    <div class="main-container container-fluid">
+        <div class="page-container">
+            <!-- Page Sidebar 左侧-->
+            {include file='common/left'}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                        <li>
+                            <!--
+                         :url （'控制器/和方法'）
+                         转跳到首页
+                           -->
+                            <a href="{:url('Index/index')}">系统</a>
+                        </li>
+                        <li class="active">图片管理</li>
+                    </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+                <!-- Page Body -->
+                <div class="page-body">
+
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="widget">
+                                <div class="widget-body">
+                                    <div class="flip-scroll">
+                                        <table class="table table-bordered table-hover">
+                                            <thead class="">
+                                                <tr>
+                                                    <th >图片</th>
+                                                    <th class="text-center" width="13%" >操作</th>
+                                                </tr>
+                                            </thead>
+
+
+                                            <tbody>
+                                            {volist name="imgRes" id="img"}
+                                                <tr>
+                                                    <th><img height="40" src="{$img}"></th>
+                                                    <td align="center">
+                                                        <!--  当前控制器的edit方法传入一个id获取-->
+                                                        <!--通过ajxs异步处理来删除 delimg(this)里的的this是把当前的元素传过去 -->
+                                                        <a href="#"  onclick="delimg(this);"  id="{$img}" class="btn btn-danger btn-sm shiny">
+                                                            <i class="fa fa-trash-o"></i> 删除
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            {/volist}
+
+                                           </tbody>
+                                        </table>
+                                        <script type="text/javascript">
+                                            function  delimg(tu){
+                                                if (!confirm('确定删除图片')){
+                                                    return false ;
+                                                }
+                                                var url ="{:url('delimg')}";                  //请求的地址
+                                                var imgsrc=$(tu).attr('id');  //请求参数 接收这个对象attr是只那个属性的值（‘id’）  使用post方式 id的值就是路径
+
+                                                $.ajax({
+                                                    url : url,
+                                                    type : "post",
+                                                    dataType : "json",
+                                                    data : {imgsrc:imgsrc}, //<!--值和名称 发送的参数 --> 这个值是在article控制器里面接收的img的 参数
+                                                    success : function(data,) {
+                                                        if(data==1){
+                                                            $(tu).parent().parent().remove();
+                                                            alert('删除成功');
+                                                        }
+                                                        else if(data==2){
+                                                            alert('删除失败');
+                                                        }
+                                                        else {
+                                                            alert('图片不存在');
+                                                        }
+                                                        }
+
+                                                });
+
+                                            }
+
+                                        </script>
+                                    </div>
+                                    <!-- render 分页-->
+
+                                    <div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+        </div>
+    </div>
+
+    <!--Basic Scripts-->
+    <script src="__admin__/style/jquery_002.js"></script>
+    <script src="__admin__/style/bootstrap.js"></script>
+    <script src="__admin__/style/jquery.js"></script>
+    <!--Beyond Scripts-->
+    <script src="__admin__/style/beyond.js"></script>
+
+
+
+</body>
+
+</html>
