@@ -83,15 +83,15 @@ class Brand  extends Controller //继承 控制类
       if ($_FILES['brand_img']['tmp_name'])
       {
         //获取选中主键id里的brand_img旧图
-      $oidBrands=db('brand')->field('brand_img')->find($data['id']); 
+      	$oidBrands=db('brand')->field('brand_img')->find($data['id']);
 // 获取旧图地 ，定一个常量然后在拼装上$oidBrands['brand_img']旧图地址，就可以进行删除操作
-      $oidBrandImg=IMG_UPLOADS.$oidBrands['brand_img'];
+      	$oidBrandImg=IMG_UPLOADS.$oidBrands['brand_img'];
       //进行删除操作
-      if(file_exists($oidBrandImg)){
+      	if(file_exists($oidBrandImg)){
         //易错符
         @unlink($oidBrandImg);
 
-      }
+      	}
         $data['brand_img'] = $this->upload();
       } else {
         $data['brand_img'] = '无图片';
@@ -123,8 +123,23 @@ class Brand  extends Controller //继承 控制类
   //品牌删除 帮定他id
   public function del($id)
   {
+
+
+
+
+	  $Brand=db('brand');
+	  $Brands=$Brand->field('brand_img')->find($id);
+	  // 获取旧图地 ，定一个常量然后在拼装上$oidBrands['brand_img']旧图地址，就可以进行删除操作
+	  //进行删除操作
+	  if(file_exists($Brands)){
+		  $BrandImg=IMG_UPLOAD.$Brands['brand_img'];
+
+		  //易错符
+		  @unlink($BrandImg);
+
+	  }
     //绑定数据库表使用tp5里的方法删除
-    $del = db('brand')->delete($id);
+    $del = $Brand->delete($id);
     if ($del) {
       //添加成功有提示也跳转到lst界面
       $this->success('删除品牌成功！', 'lst');

@@ -118,6 +118,23 @@
                                                                 </div>
 
                                                                 <div class="form-group">
+                                                                    <label for="username" class="col-sm-2 control-label no-padding-right">
+                                                                        推荐位
+                                                                    </label>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="checkbox">
+                                                                            {volist name="goodsRecposRes" id="recpos"}
+                                                                            <label style="margin-left: 10px">
+                                                                                <input  type="checkbox"  name="recpos[]" class="inverted" value="{$recpos.id}" >
+                                                                                <span class="text">{$recpos.rec_name}</span>
+                                                                            </label>
+                                                                            {/volist}
+                                                                        </div>
+                                                                    </div>
+                                                                    <p class="help-block col-sm-4 red">* 必填</p>
+                                                                </div>
+
+                                                                <div class="form-group">
                                                                     <label for="username" class="col-sm-2 control-label no-padding-right">商品主图</label>
                                                                     <div class="col-sm-6">
                                                                         <input class="form-control" style="border: none; box-shadow:none"  name="og_thumb"  type="file">

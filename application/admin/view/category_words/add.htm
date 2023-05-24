@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Chen</title>
+    <title>关联词ADD</title>
 
     <meta name="description" content="Dashboard">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,9 +41,9 @@
                             <a href="{:url('Index/index')}">系统</a>
                         </li>
                         <li>
-                            <a href="{:url('Attr/lst')}">商品属性管理</a>
+                            <a href="{:url('categoryWords/lst')}">关联词管理</a>
                         </li>
-                        <li class="active">添加商品属性</li>
+                        <li class="active">添加关联词</li>
                     </ul>
                 </div>
                 <!-- /Page Breadcrumb -->
@@ -55,75 +55,40 @@
                         <div class="col-lg-12 col-sm-12 col-xs-12">
                             <div class="widget">
                                 <div class="widget-header bordered-bottom bordered-blue">
-                                    <span class="widget-caption">新增商品属性</span>
+                                    <span class="widget-caption">新增关联词</span>
                                 </div>
                                 <div class="widget-body">
                                     <div id="horizontal-form">
-                                        <form class="form-horizontal" role="form" action="" method="post"
-                                            enctype="multipart/form-data">
+                                        <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
                                             <!--   enctype意思是可以上传图片-->
-
-
-
                                             <div class="form-group">
-                                                <label for="username" class="col-sm-2 control-label no-padding-right">所属类型</label>
+                                                <label for="username" class="col-sm-2 control-label no-padding-right">关联的顶级栏目</label>
                                                 <div class="col-sm-6">
-                                                    <select name="type_id">
-                                                        <option>请选择</option>
-                                                        <!--循环-->
-                                                        {volist name="typeRes" id="type"}
-                                                        <option value="{$type.id}">{$type.type_name}</option>
+                                                    <select name="category_id">
+                                                        <option value="">请选择</option>
+                                                        {volist name="cateRes" id="cate"}
+                                                        <!--获取和传输顶级栏目-->
+                                                        <option value="{$cate.id}">{$cate.cate_name}</option>
                                                         {/volist}
                                                     </select>
                                                 </div>
                                                 <p class="help-block col-sm-4 red">* 必填</p>
                                             </div>
 
-
-
                                             <div class="form-group">
-                                                <label for="username" class="col-sm-2 control-label no-padding-right">商品属性名称</label>
+                                                <label for="username" class="col-sm-2 control-label no-padding-right">关联词 </label>
                                                 <div class="col-sm-6">
-                                                    <input class="form-control"  name="attr_name" required="" type="text">
+                                                    <input class="form-control" id="" placeholder="" name="word" required="" type="text">
                                                 </div>
                                                 <p class="help-block col-sm-4 red">* 必填</p>
                                             </div>
 
-
                                             <div class="form-group">
-                                                <label for="username" class="col-sm-2 control-label no-padding-right">商品属性类型</label>
+                                                <label for="username" class="col-sm-2 control-label no-padding-right">关联地址</label>
                                                 <div class="col-sm-6">
-                                                    <div class="radio" style="float:left; padding-right:12px;">
-                                                        <label>
-                                                            <input name="attr_type" value="1"  class="colored-blue" checked="checked" type="radio">
-                                                            <span class="text">单选</span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="radio" style="float:left; padding-right:12px;">
-                                                        <label>
-                                                            <input name="attr_type" value="2" type="radio" class="colored-blue"  >
-                                                            <span class="text">唯一</span>
-                                                        </label>
-                                                    </div>
+                                                    <input class="form-control" placeholder="" name="link_url" type="text">
                                                 </div>
-                                                <p class="help-block col-sm-4 red">* 必填</p>
                                             </div>
-
-
-
-                                            <div class="form-group">
-                                                <label for="username" class="col-sm-2 control-label no-padding-right">商品属性值列表</label>
-                                                <div class="col-sm-6">
-                                                    <textarea class="form-control" name="attr_values"></textarea>
-                                                </div>
-                                                <p class="help-block col-sm-4 red">* 必填</p>
-                                            </div>
-
-
-
-
-
-
 
 
 

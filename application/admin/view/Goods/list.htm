@@ -65,7 +65,7 @@
                                                 <tr>
                                                     <th class="text-center" width="4%">ID</th>
                                                     <th width="9%">名称</th>
-                                                    <th  width="10%">编号</th>
+                                                    <th  class="text-center" width="10%">编号</th>
                                                     <th class="text-center"class="text-center"  width="6%">缩略图</th>
                                                     <th class="text-center" width="8%">市场价</th>
                                                     <th class="text-center" width="5%">本店价</th>
@@ -80,62 +80,57 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {volist name='goodsRes' id='goods'}
-                                                <tr align="center">
-                                                    <td align="center">{$goods.id}</td>
-                                                    <td align="">{$goods.goods_name| cut_str=###,10}</td>
-                                                    <td>{$goods.goods_code}</td>
-                                                    <td align="center">
-                                                        {if condition="$goods['sm_thumb'] neq 0"}
-                                                        <img src="__UPADMIN__/{$goods.sm_thumb}" height="30px">
-                                                        {else /}
-                                                        暂无图片
-                                                        {/if}
-                                                    </td>
-                                                    <td>{$goods.markte_price}</td>
-                                                    <td>{$goods.shop_price}</td>
-                                                    <td>
-                                                        {if condition="$goods['on_sale'] neq 0"}
-                                                        已上架
-                                                        {else /}
-                                                        未上架
-                                                        {/if}
-                                                    </td>
-                                                    <td>{$goods.cate_name}</td>
+                                            {volist name="goodsRes" id="goods"}
+                                               <tr>
+                                                   <td align="center">{$goods.id}</td>
+                                                   <td align="center">{$goods.goods_name|cut_str=###,13}</td>
+                                                   <td>{$goods.goods_code}</td>
+                                                   <td align="center">
+                                                       {if condition="$goods['sm_thumb'] neq ''"}
+                                                       <img src="__UPADMIN__/{$goods.sm_thumb}" height="30">
+                                                       {else /}
+                                                       暂无主图
+                                                       {/if}
+                                                   </td>
+                                                   <td align="center">{$goods.markte_price}</td>
+                                                   <td align="center">{$goods.shop_price}</td>
+                                                   <td align="center">{if condition="$goods['on_sale'] eq 1"}已上架{else /}未上架{/if}</td>
+                                                   <td align="center">
+                                                   {if condition="$goods['cate_name']"}
+                                                   {$goods.cate_name}
+                                                   {else /}未设置
+                                                   {/if}
+                                                   </td>
+                                                   <td align="center">
+                                                       {if condition="$goods['brand_name']"}
+                                                       {$goods.brand_name}
+                                                       {else /}未设置
+                                                       {/if}
+                                                   </td>
+                                                   <td align="center">
+                                                       {if condition="$goods['type_name']"}
+                                                       {$goods.brand_name}
+                                                       {else /}未设置
+                                                       {/if}
+                                                   </td>
+                                                   <td align="center">{$goods.goods_weight}</td>
+                                                   <td align="center">{$goods.weiht_uint}</td>
+                                                   <td align="center">{if condition="$goods['gn']"}{$goods.gn}{else /}0{/if}</td>
+                                                   <td align="center">
+                                                   <a href="{:url('inventory',array('id'=>$goods['id']))}" class="btn btn-primary btn-darkorange btn-sm shiny">
+                                                       <i class="fa fa-list"></i> 库存
+                                                   </a>
 
-                                                    <td>
-                                                        {if condition="$goods['brand_name']"}
-                                                        {$goods.brand_name}
-                                                        {else /}
-                                                        未设置
-                                                        {/if}
-                                                    </td>
+                                                   <a href="{:url('edit',array('id'=>$goods['id']))}" class="btn btn-primary btn-sm shiny">
+                                                       <i class="fa fa-edit"></i> 编辑
+                                                   </a>
 
-                                                    <td>
-                                                        {if condition="$goods['type_name']"}
-                                                        {$goods.type_name}
-                                                        {else /}
-                                                        未设置
-                                                        {/if}
-                                                    </td>
-                                                    <td>{$goods.goods_weight}</td>
-                                                    <td>{$goods.weiht_uint}</td>
-                                                    <td>{if condition="$goods['gn']"}{$goods.gn}{else/}0{/if}</td>
-                                                    <td align="center">
-                                                        <a href="{:url('inventory',array('id'=>$goods['id']))}" class="btn btn-darkorange btn-sm shiny">
-                                                            <i class="fa fa-list"></i>库存
-                                                        </a>
-                                                        <a href="{:url('edit',array('id'=>$goods['id']))}" class="btn btn-primary btn-sm shiny">
-                                                            <i class="fa fa-edit"></i> 编辑
-                                                        </a>
-                                                        <!-- 用url 访问到控制器里的del的方法传递一个值下面的id   -->
-                                                        <a href="#" onClick="warning('确实要删除吗', '{:url('del',array('id'=>$goods['id']))}')"
-                                                            class="btn btn-danger btn-sm shiny">
-                                                            <i class="fa fa-trash-o"></i> 删除
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                {/volist}
+                                                   <a href="#" onClick="warning('确实要删除吗', '{:url('del',array('id'=>$goods['id']))}')" class="btn btn-danger btn-sm shiny">
+                                                       <i class="fa fa-trash-o"></i> 删除
+                                                   </a>
+                                                   </td>
+                                               </tr>
+                                            {/volist}
                                             </tbody>
                                         </table>
                                     </div>

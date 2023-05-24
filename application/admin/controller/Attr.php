@@ -9,6 +9,7 @@ class Attr  extends Controller //继承 控制类
 {   //商品类型列表
   public function lst()
   {
+	  //连表操作
    $typeId = input('type_id'); //是类型的id
     if ($typeId){
         $map['type_id']=['=',$typeId];

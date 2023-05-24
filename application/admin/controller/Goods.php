@@ -16,17 +16,23 @@ class Goods extends Controller //继承 控制类
     public function lst()
     {
         //tp5 手册的JOIN方法也是连贯操作方法之一，用于根据两个或多个表中的列之间的关系，从这些表中查询数据，关联表（连表查询）
-        $join = [
-            //在tp5中的join  LEFT JOIN: 即使右表中没有匹配，也从左表返回所有的行 g是goods表的别名
-            ['category c', 'g.category_id=c.id'], //关联category c的意思是给category表取一个别名 //条件就是goods 表的category_id 关联category表的id字段
-            ['brand b', 'g.brand_id=b.id', 'LEFT'],//关联brand b的意思是给brand表取一个别名 //条件就是goods 表的brand_id 关联brand表的id字段
-            ['type t', 'g.type_id=t.id', 'LEFT'],//关联type t的意思是给type表取一个别名//条件就是goods 表的type_id  表的id 关联type表的id字段
-            ['product p', 'g.id=p.goods_id', 'LEFT'],////关联product p的意思是给product去一个别名 //条件就是goods 表的id 关联product表的goods_id字段
-        ];
+		//在tp5中的join  LEFT JOIN: 即使右表中没有匹配，也从左表返回所有的行 g是goods表的别名
+		//关联category c的意思是给category表取一个别名 //条件就是goods 表的category_id 关联category表的id字段
+		//关联brand b的意思是给brand表取一个别名 //条件就是goods 表的brand_id 关联brand表的id字段
+		//关联type t的意思是给type表取一个别名//条件就是goods 表的type_id  表的id 关联type表的id字段
+		////关联product p的意思是给product去一个别名 //条件就是goods 表的id 关联product表的goods_id字段
         //paginate是分页  alias 是个goods去一个别名 为g; // sum(p.goods_number)意思是求p表goods_number字段内容值的总和 ，定义一个名字为gn是给前端传递数据的值的
         //  group('g.id')可以让求和出来的值和对应的商品一一对应
-        $goodsRes = db('goods')->alias('g')->
-        field('g.*,c.cate_name,b.brand_name,t.type_name,sum(p.goods_number) gn')->join($join)->group('g.id')->order('g.id DESC')->paginate(10);
+		$join = [
+			['category c','g.category_id=c.id','LEFT'],
+			['brand b','g.brand_id=b.id','LEFT'],
+			['type t','g.type_id=t.id','LEFT'],
+			['product p','g.id=p.goods_id','LEFT'],
+		];
+        $goodsRes = db('goods')->alias('g')->field('g.*,c.cate_name,b.brand_name,t.type_name,SUM(p.goods_number) gn')->join($join)->group('g.id')->order('g.id DESC')->paginate(6);
+
+//		$goodsRes=db('goods')->alias('g')->field('g.*,c.cate_name,b.brand_name,t.type_name,SUM(p.goods_number) gn')->join($join)->group('g.id')->order('g.id DESC')->paginate(6);
+//		$goodsRess = db('goods')->select();
 
         $this->assign(
             [
@@ -34,6 +40,7 @@ class Goods extends Controller //继承 控制类
             ]
         );
         return view('list');
+
     }
 
     //商品类型添加
@@ -68,7 +75,9 @@ class Goods extends Controller //继承 控制类
         //分配都前端模板中  获取类型
         $typeRes = db('type')->select();
         //品牌分类
-        $brandRes = db('brand')->field('id,brand_name')->select();//用field给他限定字段
+        $brandRes = db('brand')->field('id,brand_name')->select();//用field给他限定字段go
+		//商品推荐位
+		$goodsRecposRes = db('rec_pos')->where('rec_type','=',1)->select();
         //商品分类
         $Category = new Catetree();
         $CategoryObj = db('Category');
@@ -79,6 +88,7 @@ class Goods extends Controller //继承 控制类
             'typeRes' => $typeRes,
             'brandRes' => $brandRes,
             'CategoryRes' => $CategoryRes,
+			'goodsRecposRes'=> $goodsRecposRes,
         ]);
         return view();
     }
@@ -134,7 +144,16 @@ class Goods extends Controller //继承 控制类
         }
         //查询当前商品基本信息
         $goods = db('goods')->find($goodsId); //查询单个数据使用 find 方法 返回一维数组
-
+		//商品推荐位
+		$goodsRecposRes = db('rec_pos')->where('rec_type','=',1)->select();
+		//当前商品相关数据推荐位,1就是必需是商品
+		$_myGoodsRecposRes = db('rec_item')->where(array('value_type'=>1,'value_id'=>$goodsId))->select();
+		//把当前商品相关数据推荐位获取的数据改写成一维数组
+		$myGoodsRecposRes = array();
+		foreach ($_myGoodsRecposRes as $K => $v){//v就是代表的里的数据，只要把他的元素值取出来
+			$myGoodsRecposRes[]=$v['recpos_id'];
+		}
+//		dump($myGoodsRecposRes);die();
         //查询当前商品拥有的商品属性的属性值 goods_attr
         $_gattrRes= db('goods_attr')->where('goods_id','=',$goodsId)->select();
 //        dump($_gattrRes);die();
@@ -161,6 +180,8 @@ class Goods extends Controller //继承 控制类
             'gphotoRes' => $gphotoRes,
             'attrRes' => $attrRes,
             'gattrRes' => $gattrRes,
+			'goodsRecposRes' => $goodsRecposRes,
+			'myGoodsRecposRes' => $myGoodsRecposRes,
         ]);
         return view();
     }

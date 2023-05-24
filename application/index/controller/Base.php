@@ -4,11 +4,14 @@ use  think\Controller;
 class Base extends Controller
 {
 	public $config;//配置项数组
+	// 直接model 方法
     public function _initialize(){
 		$this->_getFooterArts();//获取并分配低部帮助信息
 		$this->_getNav();//获取并分配导航栏
 		$this->_getConfs();//获取并分配配置项，config赋值
+		$this->_getCates();//顶级分类 和 二级分类获取
 	}
+
 	//只在当前的控制器类里面使用
 	//获取文章和cate类的信息配置
 	private function _getFooterArts(){
@@ -43,6 +46,14 @@ class Base extends Controller
 				'configs'=>$confRes
 			]);
 }
+	//配置顶级分类和二级分类
+	private function _getCates(){
+		$cateRes = model('Category')->getCates();
+//		dump($cateRes);die();
+		$this->assign([
+			'cateRes'=>$cateRes,
+		]);
+	}
    //低部网店信息
 //	private	function _getShopInfo() {
 //		$shopInfoRes = model('Article')->getShopInfo();

@@ -30,8 +30,8 @@ class Goods extends Model //extends继承 控制类
                 $smThumb = date("Ymd") . DS . 'sm_' . $thumbName;//小图地址
                 $image = \think\Image::open(IMG_UPLOAD . $ogThumb);//原图 地址
                 $image->thumb(500, 500)->save(IMG_UPLOAD . $bigThumb);//大图地址
-                $image->thumb(200, 200)->save(IMG_UPLOAD . $midThumb);//中图地址
-                $image->thumb(80, 80)->save(IMG_UPLOAD . $smThumb);//小图地址
+                $image->thumb(240, 240)->save(IMG_UPLOAD . $midThumb);//中图地址
+                $image->thumb(58,58)->save(IMG_UPLOAD . $smThumb);//小图地址
                 //把四类图片存放到数据库
                 $goods->og_thumb = $ogThumb;
                 $goods->big_thumb = $bigThumb;
@@ -53,6 +53,14 @@ class Goods extends Model //extends继承 控制类
             $goodsID = $goods->id;
 //            处理新增商品属性
             $goodsDate = input('post.');
+			//处理商品推荐位， 先把原来的删除掉再添加新的
+			db('rec_item')->where(array('value_type'=>1,'value_id'=>$goodsID))->delete();
+
+			if(isset($goodsDate['recpos'])){
+				foreach ($goodsDate['recpos'] as $k => $v){
+					db('rec_item')->insert(['recpos_id' => $v, 'value_id' => $goodsID,'value_type' => 1]);
+				}
+			}
 //            dump($goodsDate);die();
             if (isset($goodsDate['goods_attr'])) {//isset — 检测变量是否已设置并且非 null
                 $money = 0;//处理单选属性价格 （初始值）
@@ -213,9 +221,9 @@ class Goods extends Model //extends继承 控制类
 
         });
 
-
 //            会员价格处理
         Goods::afterInsert(function ($goods) {
+			$goodsDate = input('post.');//接收表单数据
             //批量写人会员价格
 //            dump($goods);die();
             //把会员价格数组拿出来 ， 在html界面设置了mp 是把会员价格放进去
@@ -232,6 +240,12 @@ class Goods extends Model //extends继承 控制类
 
                 }
             }
+			//处理商品推荐位
+			if(isset($goodsDate['recpos'])){
+				foreach ($goodsDate['recpos'] as $k => $v){
+					db('rec_item')->insert(['recpos_id' => $v, 'value_id' => $goodsID,'value_type' => 1]);
+				}
+			}
 
 
 //           商品属性处理
@@ -239,7 +253,7 @@ class Goods extends Model //extends继承 控制类
 //            $goodsAttr = $goods->goods_attr; //对应前端商品属性值自己定义数组goods_attr
 //            $goodsPrice = $goods->goods_price;//对应前端商品属性价格自己定义数组goods_price
             //利用数组嵌套进行设置
-            $goodsDate = input('post.');
+
             $money = 0;//处理单选属性价格 （初始值）
             if (isset($goodsDate['goods_attr'])) {//isset — 检测变量是否已设置并且非 null
                 foreach ($goodsDate['goods_attr'] as $k => $v) {
@@ -311,9 +325,12 @@ class Goods extends Model //extends继承 控制类
 
 
         });
+
         //删除有商品及后面该所有数据
         Goods::beforeDelete(function ($goods) {
             $goodsID = $goods->id;
+			//如果该商品设置为零推荐，则删除其推荐记录
+			db('recItem')->where(array('value_id'=>$goodsID,'value_type'=>1))->delete();
             //删除主图及其缩略图
             //使用数组的方式 使用循环删除
             // 判断是否有值 ，有图

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\wamp64\www\shop\public/../application/admin\view\category\list.htm";i:1684220542;s:66:"D:\wamp64\www\shop\public/../application/admin\view\common\top.htm";i:1684220542;s:67:"D:\wamp64\www\shop\public/../application/admin\view\common\left.htm";i:1684220542;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\wamp64\www\shop\public/../application/admin\view\category\list.htm";i:1684232731;s:66:"D:\wamp64\www\shop\public/../application/admin\view\common\top.htm";i:1684232731;s:67:"D:\wamp64\www\shop\public/../application/admin\view\common\left.htm";i:1684822925;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -145,6 +145,57 @@
                 </li>
             </ul>
         </li>
+
+        <li>
+            <a href="#" class="menu-dropdown">
+                <i class="menu-icon fa  fa-thumbs-up"></i>
+                <span class="menu-text">推荐位管理</span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="<?php echo url('Recpos/lst'); ?>">
+                        <span class="menu-text">推荐位列表 </span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo url('Recpos/add'); ?>">
+                        <span class="menu-text">添加推荐位</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#" class="menu-dropdown">
+                <i class="menu-icon fa  fa-random"></i>
+                <span class="menu-text">栏目关联信息</span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="<?php echo url('CategoryWords/lst'); ?>">
+                        <span class="menu-text">推荐词关联</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo url('CategoryBrands/lst'); ?>">
+                        <span class="menu-text">品牌关联</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo url('CategoryAd/lst'); ?>">
+                        <span class="menu-text">左图品牌关联</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         <li>
             <a href="#" class="menu-dropdown">
                 <i class="menu-icon fa  fa-buysellads"></i>
@@ -317,7 +368,16 @@
                         <i class="menu-expand"></i>
                     </a>
                 </li>
+                <li>
+                    <a href="<?php echo url('AlternateImg/lst'); ?>">
+                        <span class="menu-text">首页轮播图管理</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+
             </ul>
+
+
         </li>
         <li>
             <a href="#" class="menu-dropdown">

@@ -25,4 +25,11 @@ class Article  extends	Model
 		$artArray = $this->where('cate_id','=',68)->field('id,title')->select();
 		return $artArray;
 	}
+
+	//获取首页公告栏目信息
+	public  function getArts($id,$limit){ //一个是获取文章的id 一个是限制数量
+		$arts = $this->where('cate_id','=',$id)->order('id DESC')->limit($limit)->select();
+		return $arts;
+
+	}
 }

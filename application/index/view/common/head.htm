@@ -25,19 +25,18 @@
 		</div>
 		<div class = "dsc-search">
 			<div class = "form">
-				<form id = "searchForm" name = "searchForm" method = "get" action = "search.php"
-					  onSubmit = "return checkSearchForm()" class = "search-form">
-					<input autocomplete = "off" onKeyUp = "lookup(this.value);" name = "keywords" type = "text"
-						   id = "keyword" value = "内衣" class = "search-text" />
-					<input type = "hidden" name = "store_search_cmt" value = "0">
-					<button type = "submit" class = "button button-goods" onclick = "checkstore_search_cmt(0)">搜商品
-					</button>
+				<form id="searchForm" name="searchForm" method="get" action="search.php" onsubmit="return checkSearchForm()" class="search-form">
+					<input autocomplete="off" onkeyup="lookup(this.value);" name="keywords" id="keyword" value="{$configs.search_value}" class="search-text" type="text">
+					<input name="store_search_cmt" value="0" type="hidden">
+					<button type="submit" class="button button-goods" onclick="checkstore_search_cmt(0)">搜商品</button>
 				</form>
-				<ul class = "keyword">
-					<li><a href = "#" target = "_blank">周大福</a></li>
-					<li><a href = "#" target = "_blank">内衣</a></li>
-					<li><a href = "#" target = "_blank">Five Plus</a></li>
-					<li><a href = "#" target = "_blank">手机</a></li>
+				<ul class="keyword">
+					<?php
+					$arr=explode(',',$configs['search_keywords']);
+					foreach($arr as $k  => $v):
+										   ?>
+					<li><a href="#"><?php echo $v;?></a></li>
+					<?php endforeach?>
 				</ul>
 
 				<div class = "suggestions_box" id = "suggestions" style = "display:none;">
@@ -64,6 +63,10 @@
 			</div>
 
 			<script type = "text/javascript">
+				//ajax异步获取顶级分类的子分类、品牌、频道等相关信息在右侧菜单的路径
+				var ajax_cate_url="{:url('Category/getCateInfo')}";
+				//在下拉菜单的加载中图片路径
+				var load_img="__index__/img/loadGoods.gif";
 				function changenum(rec_id, diff, warehouse_id, area_id) {
 					var cValue = $('#cart_value').val();
 					var goods_number = Number($('#goods_number_' + rec_id).text()) + Number(diff);
@@ -140,224 +143,47 @@
 	</div>
 </div>
 <div class = "nav dsc-zoom">
-	<div class = "w <?php if(isset($show_right)){echo 'w1200';} else{ echo 'w1390';}?>">
-		<div class = "categorys site-mast">
+	<div class = "w <?php if(isset($show_right)){echo 'w1200'; }else{echo 'w1390'; }?>">
+		<div class = "categorys <?php if(!isset($show_nav)){echo 'site-mast'; }?>">
 			<div class = "categorys-type"><a href = "#" target = "_blank">全部商品分类</a></div>
 			<div class = "categorys-tab-content">
 				<div class = "categorys-items" id = "cata-nav">
-					<div class = "categorys-item" ectype = "cateItem" data-id = "858" data-eveval = "0">
-						<div class = "item item-content">
-							<i class = "iconfont icon-ele"></i>
+<!--					菜单开始-->
+					{volist name="cateRes" id="cate"}
+					<div class= "categorys-item" ectype = "cateItem" data-id = "{$cate.id}" data-eveval = "0">
+						<div class= "item item-content">
+							<i class= "iconfont {$cate.iconfont}"></i>
 							<div class = "categorys-title">
 								<strong>
-									<a href = "#" target = "_blank">家用电器</a>
+									<a href = "#" target = "_blank">{$cate.cate_name}</a><!--顶级类目-->
 								</strong>
-								<span>
-                        <a href = "#" target = "_blank">大家电</a>
-
-                        <a href = "#" target = "_blank">生活电器</a>
-
-
-
-
-            </span>
+								<span><!--子类目-->
+									{volist name="cate.chilrend" id="son_cate"}
+									  {if condition="$i lt 3"}<!-- lt 是小于,判断在菜单里面的子类里面 只会显示出前面两个子栏目-->
+                        				<a href = "{:url('index/Category/index',array('id'=>$son_cate['id']))}" target = "_blank">{$son_cate.cate_name}</a>
+									  {/if}
+									{/volist}
+								</span>
 							</div>
 						</div>
 						<div class = "categorys-items-layer" ectype = "cateLayer">
 							<div class = "cate-layer-con clearfix">
 								<div class = "cate-layer-left">
-									<div class = "cate_channel" ectype = "channels_858"></div>
-									<div class = "cate_detail" ectype = "subitems_858"></div>
+									<div class = "cate_channel" ectype = "channels_{$cate.id}"></div>
+									<div class = "cate_detail" ectype = "subitems_{$cate.id}"></div>
+
+
 								</div>
-								<div class = "cate-layer-rihgt" ectype = "brands_858"></div>
+								<div class = "cate-layer-rihgt" ectype = "brands_{$cate.id}"></div>
+
+
+
 							</div>
 						</div>
 						<div class = "clear"></div>
 					</div>
-					<div class = "categorys-item" ectype = "cateItem" data-id = "3" data-eveval = "0">
-						<div class = "item item-content">
-							<i class = "iconfont icon-digital"></i>
-							<div class = "categorys-title">
-								<strong>
-									<a href = "#" target = "_blank" class = "division_cat">手机</a>、<a href = "#"
-																									   target = "_blank"
-																									   class = "division_cat">数码</a>、<a
-										href = "#" target = "_blank" class = "division_cat">通信</a> </strong>
-								<span>
-                        <a href = "#" target = "_blank">智能设备</a>
-
-                        <a href = "#" target = "_blank">数码配件</a>
-
-
-
-
-
-
-            </span>
-							</div>
-						</div>
-						<div class = "categorys-items-layer" ectype = "cateLayer">
-							<div class = "cate-layer-con clearfix">
-								<div class = "cate-layer-left">
-									<div class = "cate_channel" ectype = "channels_3"></div>
-									<div class = "cate_detail" ectype = "subitems_3"></div>
-								</div>
-								<div class = "cate-layer-rihgt" ectype = "brands_3"></div>
-							</div>
-						</div>
-						<div class = "clear"></div>
-					</div>
-					<div class = "categorys-item" ectype = "cateItem" data-id = "4" data-eveval = "0">
-						<div class = "item item-content">
-							<i class = "iconfont icon-computer"></i>
-							<div class = "categorys-title">
-								<strong>
-									<a href = "#" target = "_blank">电脑、办公</a>
-								</strong>
-								<span>
-                        <a href = "#" target = "_blank">服务产品</a>
-
-                        <a href = "#" target = "_blank">电脑整机</a>
-
-
-
-
-
-            </span>
-							</div>
-						</div>
-						<div class = "categorys-items-layer" ectype = "cateLayer">
-							<div class = "cate-layer-con clearfix">
-								<div class = "cate-layer-left">
-									<div class = "cate_channel" ectype = "channels_4"></div>
-									<div class = "cate_detail" ectype = "subitems_4"></div>
-								</div>
-								<div class = "cate-layer-rihgt" ectype = "brands_4"></div>
-							</div>
-						</div>
-						<div class = "clear"></div>
-					</div>
-					<div class = "categorys-item" ectype = "cateItem" data-id = "5" data-eveval = "0">
-						<div class = "item item-content">
-							<i class = "iconfont icon-bed"></i>
-							<div class = "categorys-title">
-								<strong>
-									<a href = "#" target = "_blank">家居、家具、家装、厨具</a>
-								</strong>
-								<span>
-                        <a href = "#" target = "_blank">厨具</a>
-
-                        <a href = "#" target = "_blank">家装建材</a>
-
-
-
-
-
-            </span>
-							</div>
-						</div>
-						<div class = "categorys-items-layer" ectype = "cateLayer">
-							<div class = "cate-layer-con clearfix">
-								<div class = "cate-layer-left">
-									<div class = "cate_channel" ectype = "channels_5"></div>
-									<div class = "cate_detail" ectype = "subitems_5"></div>
-								</div>
-								<div class = "cate-layer-rihgt" ectype = "brands_5"></div>
-							</div>
-						</div>
-						<div class = "clear"></div>
-					</div>
-					<div class = "categorys-item" ectype = "cateItem" data-id = "6" data-eveval = "0">
-						<div class = "item item-content">
-							<i class = "iconfont icon-clothes"></i>
-							<div class = "categorys-title">
-								<strong>
-									<a href = "#" target = "_blank">男装、女装、内衣</a>
-								</strong>
-								<span>
-                        <a href = "#" target = "_blank">女装</a>
-
-                        <a href = "#" target = "_blank">男装</a>
-
-
-
-
-            </span>
-							</div>
-						</div>
-						<div class = "categorys-items-layer" ectype = "cateLayer">
-							<div class = "cate-layer-con clearfix">
-								<div class = "cate-layer-left">
-									<div class = "cate_channel" ectype = "channels_6"></div>
-									<div class = "cate_detail" ectype = "subitems_6"></div>
-								</div>
-								<div class = "cate-layer-rihgt" ectype = "brands_6"></div>
-							</div>
-						</div>
-						<div class = "clear"></div>
-					</div>
-					<div class = "categorys-item" ectype = "cateItem" data-id = "8" data-eveval = "0">
-						<div class = "item item-content">
-							<i class = "iconfont icon-shoes"></i>
-							<div class = "categorys-title">
-								<strong>
-									<a href = "#" target = "_blank">鞋靴、箱包、钟表、奢侈品</a>
-								</strong>
-								<span>
-                        <a href = "#" target = "_blank">奢侈品</a>
-
-                        <a href = "#" target = "_blank">功能箱包</a>
-
-
-
-
-
-
-            </span>
-							</div>
-						</div>
-						<div class = "categorys-items-layer" ectype = "cateLayer">
-							<div class = "cate-layer-con clearfix">
-								<div class = "cate-layer-left">
-									<div class = "cate_channel" ectype = "channels_8"></div>
-									<div class = "cate_detail" ectype = "subitems_8"></div>
-								</div>
-								<div class = "cate-layer-rihgt" ectype = "brands_8"></div>
-							</div>
-						</div>
-						<div class = "clear"></div>
-					</div>
-					<div class = "categorys-item" ectype = "cateItem" data-id = "860" data-eveval = "0">
-						<div class = "item item-content">
-							<i class = "iconfont icon-heal"></i>
-							<div class = "categorys-title">
-								<strong>
-									<a href = "#" target = "_blank">个人化妆、清洁用品</a>
-								</strong>
-								<span>
-                        <a href = "#" target = "_blank">面部护肤</a>
-
-                        <a href = "#" target = "_blank">洗发护发</a>
-
-
-
-
-
-
-            </span>
-							</div>
-						</div>
-						<div class = "categorys-items-layer" ectype = "cateLayer">
-							<div class = "cate-layer-con clearfix">
-								<div class = "cate-layer-left">
-									<div class = "cate_channel" ectype = "channels_860"></div>
-									<div class = "cate_detail" ectype = "subitems_860"></div>
-								</div>
-								<div class = "cate-layer-rihgt" ectype = "brands_860"></div>
-							</div>
-						</div>
-						<div class = "clear"></div>
-					</div>
+					{/volist}
+<!--					菜单结束-->
 				</div>
 			</div>
 		</div>

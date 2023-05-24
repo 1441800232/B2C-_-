@@ -125,6 +125,28 @@
                                                     </div>
 
                                                     <div class="form-group">
+                                                        <label for="username" class="col-sm-2 control-label no-padding-right">
+                                                            推荐位
+                                                        </label>
+                                                        <div class="col-sm-6">
+                                                            <div class="checkbox">
+                                                                {volist name="goodsRecposRes" id="recpos"}
+                                                                <label style="margin-left: 10px">
+                                                                    <?php if(in_array($recpos['id'],$myGoodsRecposRes)){
+                                                                                $checked='checked="checked"';
+                                                                                } else{
+                                                                                $checked='';
+                                                                                }?>
+                                                                    <input <?php echo $checked?> type="checkbox" name="recpos[]" class="inverted" value="{$recpos.id}" >
+                                                                    <span class="text">{$recpos.rec_name}</span>
+                                                                </label>
+                                                                {/volist}
+                                                            </div>
+                                                        </div>
+                                                        <p class="help-block col-sm-4 red">* 必填</p>
+                                                    </div>
+
+                                                    <div class="form-group">
                                                         <label for="username" class="col-sm-2 control-label no-padding-right">商品主图</label>
                                                         <div class="col-sm-6">
                                                             <input class="form-control" style="border: none; box-shadow:none" name="og_thumb" type="file">
@@ -253,7 +275,10 @@
                                                     <div class="form-group">
                                                         <label for="username" class="col-sm-2 control-label no-padding-right">商品类型</label>
                                                         <div class="col-sm-6" >
-                                                            <SELECT name="type_id" disabled="disabled"> <!--通过着name 切换类型实时 进行绑定下面数据属性   -->
+                                                            <SELECT name="type_id"
+                                                                    {if condition="$goods['type_id'] neq 0" } disabled="disabled"
+                                                                    {/if} >
+                                                                     <!--通过着name 切换类型实时 进行绑定下面数据属性   -->
                                                                 <option value="0" selected="selected" >请选择</option>
                                                                 {volist name="typeRes" id="type"}
                                                                 <option
@@ -349,7 +374,7 @@
                                                         <div class="col-sm-6">
                                                             <!-- addphoto(this) 是定义一个方法 并把他自己传递进去，
                                                             this就是把自己传递进去 自己就是a标签这个元素-->
-                                                            <a onclick="addrow(this);"href="javascript:;">[+]</a>
+                                                            <a onclick="addphoto(this);"href="javascript:;">[+]</a>
                                                             <!--name=“”改成数组模式才可以接收到所有的提交的图片-->
                                                             <input class="form-control" style="border: none;width: 50%; box-shadow:none; display: inline-block" name="goods_photo[]" type="file">
                                                         </div>
@@ -506,6 +531,23 @@ var ue = UE.getEditor('goods_des', {initialFrameWidth: 620, initialFrameHeight: 
 
     }
 
+    //addphoto方法可以对select加一对减一
+    function addphoto(o) {
+        //定义最外层的div 他下面的副记标签的父记标签 parent()就是父记标签的意思是
+        var div=$(o).parent().parent();
+        if ($(o).html()  == '[+]'){
+            //clone()函数就复制克隆
+            var newdiv=div.clone();//clone是克隆方法，克隆方法生成被选元素的副本，包含子节点、文本和属性。
+            newdiv.find('a').html('[-]');//利用find函数去查询到newdiv里的a标签，在利用html把a标签里面的'+'修改成'-'
+            div.after(newdiv);
+        }else {
+            //remove函数
+            //方法移除被选元素，包括所有的文本和子节点。
+            // 该方法也会移除被选元素的数据和事件。
+            //删除所有匹配的元素。
+            div.remove();
+        }
+    }
     //addrow方法可以对select加一对减一
     // function addrow(o) {
     //     //定义最外层的div 他下面的副记标签的父记标签 parent()就是父记标签的意思是
