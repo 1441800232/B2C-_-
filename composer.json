@@ -24,12 +24,16 @@
         "topthink/think-testing": "^1.0",
         "topthink/think-mongo": "1.7",
         "topthink/think-captcha": "^1.0",
-        "topthink/think-angular": "^1.0"
+        "topthink/think-angular": "^1.0",
+        "phpmailer/phpmailer": "^6.7"
     },
     "extra": {
         "think-path": "thinkphp"
     },
     "config": {
-        "preferred-install": "dist"
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "topthink/think-installer": true
+        }
     }
 }

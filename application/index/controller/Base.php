@@ -16,9 +16,24 @@ class Base extends Controller
 	//获取文章和cate类的信息配置
 	private function _getFooterArts(){
 		$mArticle=model('Article');
+		if (cache('helpCateRes')){
+			$helpCateRes=cache('helpCateRes');
+		}else{
+			$helpCateRes=$mArticle->getFooterArts();//低部帮助信息
+			cache('helpCateRes',$helpCateRes,$this->config['cache_time']);
+
+		}
+
+		if (cache('shopInfoRes')){
+			$shopInfoRes = cache('shopInfoRes');
+		}else{
+			$shopInfoRes=$mArticle->getShopInfo();//低部网店信息
+			if ($this->config['cache'] == '是'){
+				cache('shopInfoRes',$shopInfoRes,$this->config['cache_time']);
+			}
+
+		}
 		//获取article模型里面的getFooterArts方法
-		$helpCateRes=$mArticle->getFooterArts();//低部帮助信息
-		$shopInfoRes=$mArticle->getShopInfo();//低部网店信息
 		//分配模板中
 		$this->assign([
 			'helpCateRes' => $helpCateRes,
@@ -28,11 +43,16 @@ class Base extends Controller
 	}
 	//导航栏目
 	private function  _getNav(){
-		$_navRes=db('nav')->order('sort DESC')->select();//_取别名
-		$navRes=array();
-		//对navRes数组改写，把查询出来的数据分成两组数组
-		foreach ($_navRes as $k => $v){
-			$navRes[$v['pos']][]=$v;
+		if (cache('navRes')){
+			$navRes=cache('navRes');
+		}else{
+			$_navRes=db('nav')->order('sort DESC')->select();//_取别名
+			$navRes=array();
+			//对navRes数组改写，把查询出来的数据分成两组数组
+			foreach ($_navRes as $k => $v){
+				$navRes[$v['pos']][]=$v;
+			}
+			cache('navRes',$navRes,3600);
 		}
 		$this->assign([
 			'navRes'=>$navRes,
@@ -40,7 +60,12 @@ class Base extends Controller
 	}
 	//配置项目
 	private function _getConfs() {
-		$confRes = model('Conf')->getConfs();
+		if (cache('confRes')){
+			$confRes=cache('confRes');
+		}else{
+			$confRes = model('Conf')->getConfs();
+			cache('confRes',$confRes,3600);
+		}
 		$this->config=$confRes;
 		$this->assign([
 				'configs'=>$confRes
@@ -58,4 +83,6 @@ class Base extends Controller
 //	private	function _getShopInfo() {
 //		$shopInfoRes = model('Article')->getShopInfo();
 //	}
+
+
 }

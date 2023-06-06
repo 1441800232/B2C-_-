@@ -133,7 +133,6 @@ class Brand  extends Controller //继承 控制类
 	  //进行删除操作
 	  if(file_exists($Brands)){
 		  $BrandImg=IMG_UPLOAD.$Brands['brand_img'];
-
 		  //易错符
 		  @unlink($BrandImg);
 

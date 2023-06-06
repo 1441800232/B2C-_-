@@ -15,7 +15,10 @@ class Index extends Base
 			$noticeRes=cache('noticeRes');
 		}else{
 			$noticeRes = model('Article')->getArts(62,3);
-			cache('notice', $noticeRes,20);
+			if ($this->config['cache'] == '是') {
+				cache('notice', $noticeRes,$noticeRes,$this->config['cache_time']);
+			}
+
 		}
 
 		//促销
@@ -23,16 +26,12 @@ class Index extends Base
 			$promotionRes=cache('promotionRes');
 		}else{
 			$promotionRes = model('Article')->getArts(63,3);
-			cache('promotionRes', $promotionRes,20);
+			if ($this->config['cache'] == '是') {
+				cache('promotionRes',$promotionRes,$this->config['cache_time']);
+			}
 		}
 
-		//调用首页商品(推荐到首页下面的商品)
-		if (cache('indexGoodsRes')){
-			$promotionRes=cache('indexGoodsRes');
-		}else{
-			$indexGoodsRes = model('Goods')->getRecposGoods(12,20);
-			cache('indexGoodsRes', $indexGoodsRes,3600);
-		}
+
 
 
 		//获取首页大模块顶级分类数据开始
@@ -58,7 +57,11 @@ class Index extends Base
 				//获取当前广告位置的顶级栏目的左侧图片信息
 				$categoryRes[$k]['leftImg'] = model('CategoryAd')->getCatetCategoryAd($v['id']);
 			}
-			cache('categoryRes', $categoryRes,3600);//每1小时缓存一次
+			//缓存时长
+			if ($this->config['cache'] == '是') {
+				cache('categoryRes', $categoryRes,$this->config['cache_time']);
+			}
+
 		}
 		//获取首页大模块数据结束
 
@@ -67,9 +70,20 @@ class Index extends Base
 			$alternateImgRes=cache('alternateImgRes');
 		}else{
 			$alternateImgRes = model('AlternateImg')->getAlterImg();
-			cache('alternateImgRes', $alternateImgRes,3600);//每1小时缓存一次
-
+			//缓存时长
+			if ($this->config['cache'] == '是') {
+				cache('alternateImgRes', $alternateImgRes,$this->config['cache_time']);
+			}
 		}
+
+		//调用首页商品(推荐到首页下面的商品)
+		if (cache('indexGoodsRes')){
+			$indexGoodsRes=cache('indexGoodsRes');
+		}else{
+			$indexGoodsRes = model('Goods')->getRecposGoods(12,20);
+			if ($this->config['cache'] == '是') {
+				cache('indexGoodsRes', $indexGoodsRes,$this->config['cache_time']);
+			}		}
 		$this->assign([//声明一个变量分配到模板中去
 			'show_right'=>1,//文章列表和商品列表头部偏移类判断
 			'show_nav'=>1,//首页导航默认展开,其他页面默认收缩

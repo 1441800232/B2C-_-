@@ -9,7 +9,7 @@
 // | Author: 流年 <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 //图片资源处理函数
-
+//图片资源处理函数
 function my_scandir($dir=UEDITOR)
 {
     $files = array();
@@ -73,3 +73,7 @@ function cut_str($sourcestr,$cutlength)
     }
     return $returnstr;
 }
+
+//邮箱发送函数
+//发送邮件
+

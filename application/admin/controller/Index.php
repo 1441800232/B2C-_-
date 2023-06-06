@@ -9,12 +9,20 @@ class Index  extends Controller
     public function index()
     {
 
+
   return view();
 
 //分配数据给页面
   
 }
- public  function chen(){
-   return "nihao";
- }
+
+//清空缓存
+	public function  clearCache(){
+		if (cache(NULL)){
+			$this->success('缓存清除成功');
+		}else{
+			$this->error('缓存清除失败');
+		}
+	}
+
 }
