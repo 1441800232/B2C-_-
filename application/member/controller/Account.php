@@ -58,8 +58,8 @@ class Account extends Controller
 			"50" => "内容含有敏感词"
 		);
 		$smsapi = "http://www.smsbao.com/"; //短信网关
-		$user = "chen_yu"; //短信平台帐号
-		$pass = md5("chy2868391465.."); //短信平台密码
+		$user = "***"; //短信平台帐号
+		$pass = md5("****"); //短信平台密码
 		$content=mt_rand(11111,99999);//要发送的短信内容
 		$phone = input('phone');
 		$sendurl = $smsapi."sms?u=".$user."&p=".$pass."&m=".$phone."&c=".urlencode($content);
@@ -84,7 +84,7 @@ class Account extends Controller
 				$mail->SMTPAuth = TRUE;                      // 允许 SMTP 认证
 				$mail->FromName = 'PHP商城';
 				$mail->Username = '2868391465';                // SMTP 用户名  即邮箱的用户名
-				$mail->Password = 'pejcfbwdouvvdgid';             // SMTP 密码  部分邮箱是授权码(例如163邮箱)
+				$mail->Password = '*****';             // SMTP 密码  部分邮箱是授权码(例如163邮箱)
 //				$mail->SMTPSecure = 'ssl';                    // 允许 TLS 或者ssl协议
 				$mail->Port = 25;                            // 服务器端口 25 或者465 具体要看邮箱服务器支持
 			$mail->SMTPDebug = 2;
