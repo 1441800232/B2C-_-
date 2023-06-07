@@ -16,23 +16,8 @@ class Base extends Controller
 	//获取文章和cate类的信息配置
 	private function _getFooterArts(){
 		$mArticle=model('Article');
-		if (cache('helpCateRes')){
-			$helpCateRes=cache('helpCateRes');
-		}else{
-			$helpCateRes=$mArticle->getFooterArts();//低部帮助信息
-			cache('helpCateRes',$helpCateRes,$this->config['cache_time']);
-
-		}
-
-		if (cache('shopInfoRes')){
-			$shopInfoRes = cache('shopInfoRes');
-		}else{
-			$shopInfoRes=$mArticle->getShopInfo();//低部网店信息
-			if ($this->config['cache'] == '是'){
-				cache('shopInfoRes',$shopInfoRes,$this->config['cache_time']);
-			}
-
-		}
+		$helpCateRes=$mArticle->getFooterArts();//低部帮助信息
+		$shopInfoRes=$mArticle->getShopInfo();//低部网店信息
 		//获取article模型里面的getFooterArts方法
 		//分配模板中
 		$this->assign([
