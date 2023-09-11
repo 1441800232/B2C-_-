@@ -26,5 +26,7 @@ Route::rule('cate/:id','index/Cate/index','GET',['ext'=>'html|htm'],['id'=>'\d{1
 //首页路由
 //Route::rule('index','index/Index/index','GET',['ext'=>'html|htm']);
 Route::rule('category/:id','index/Category/index','get',['ext'=>'html|htm'],['id'=>'\d{1,3}']);
+Route::rule('goods/:id','index/Goods/index','get',['ext'=>'html|htm'],['id'=>'\d{1,3}']);
+Route::rule('flow1','index/Flow/flow1','get',['ext'=>'html|htm']);
 
 

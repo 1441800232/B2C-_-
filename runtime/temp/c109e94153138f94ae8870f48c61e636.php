@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:67:"D:\wamp64\www\shop\public/../application/member\view\user\index.htm";i:1686123426;s:68:"D:\wamp64\www\shop\public/../application/member\view\common\head.htm";i:1686124132;s:70:"D:\wamp64\www\shop\public/../application/member\view\common\footer.htm";i:1684232731;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:67:"D:\wamp64\www\shop\public/../application/member\view\user\index.htm";i:1691653607;s:67:"D:\wamp64\www\shop\public/../application/index\view\common\head.htm";i:1691138112;s:69:"D:\wamp64\www\shop\public/../application/index\view\common\footer.htm";i:1691138610;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -28,15 +28,31 @@ var load_icon = '<img src="__index__/img/load.gif" width="200" height="200">';
 
 <!-- 头部 -->
 <div class = "site-nav" id = "site-nav">
-	<div class = "w w1200">
+	<div class = "w w1390">
 		<div class = "fl">
 
 			<div class = "txt-info" id = "ECS_MEMBERZONE">
-
-				<a href = "#" class = "link-login red">请登录</a>
-				<a href = "#" class = "link-regist">免费注册</a>
 				<div class="scrollBody" id="scrollBody"></div>
 			</div>
+			<script type="text/javascript">
+				$(function (){
+					$.ajax({
+						type: "GET",
+						url:"<?php echo url('member/Account/checkLogin'); ?>",
+						dataType: "json",
+						success: function (data){
+							if (data.error == 0){
+								var html = "<span>您好 &nbsp;<a href='#'>"+data.username+"</a></span> <span>，欢迎来到&nbsp;<a alt='首页' title='首页' href='index.php'>陈某商场</a></span><span>[<a href='<?php echo url('member/User/loginOut'); ?>'>退出</a>]</span><div class='scrollBody' id='scrollBody'></div>";
+								$('#ECS_MEMBERZONE').html(html);
+							}else {
+								var html ="<a href = '<?php echo url('member/account/login'); ?>'class = 'link-login red'>请登录</a> <a href = '<?php echo url('member/account/reg'); ?>' class = 'link-regist'>免费注册</a>";
+								$('#ECS_MEMBERZONE').html(html);
+
+							}
+						}
+					})
+				});
+			</script>
 		</div>
 		<ul class = "quick-menu fr">
 			<?php if(is_array($navRes['top']) || $navRes['top'] instanceof \think\Collection || $navRes['top'] instanceof \think\Paginator): $i = 0; $__LIST__ = $navRes['top'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$top_nav): $mod = ($i % 2 );++$i;?>
@@ -48,7 +64,7 @@ var load_icon = '<img src="__index__/img/load.gif" width="200" height="200">';
 	</div>
 </div>
 <div class = "header">
-	<div class = "w w1200">
+	<div class = "w w1390">
 		<div class = "logo">
 			<div class = "logoImg"><a href = "#"><img src = "__index__/img/logo.png" /></a></div>
 		</div>
@@ -476,7 +492,7 @@ var load_icon = '<img src="__index__/img/load.gif" width="200" height="200">';
 						<ul>
 							<?php if(is_array($cate['arts']) || $cate['arts'] instanceof \think\Collection || $cate['arts'] instanceof \think\Paginator): $i = 0; $__LIST__ = $cate['arts'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$art): $mod = ($i % 2 );++$i;?>
 							<!--传递文章的id-->
-							<li><a href="<?php if($art['link_url']): ?> <?php echo $art['link_url']; else: ?> <?php echo url('Article/index',array('id'=>$art['id'])); endif; ?>" ><?php echo $art['title']; ?></a></li>
+							<li><a href="<?php if($art['link_url']): ?> <?php echo $art['link_url']; else: ?> <?php echo url('index/Article/index',array('id'=>$art['id'])); endif; ?>" ><?php echo $art['title']; ?></a></li>
 							<?php endforeach; endif; else: echo "" ;endif; ?>
 						</ul>
 					</div>

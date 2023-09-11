@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:65:"D:\wamp64\www\shop\public/../application/admin\view\goods\add.htm";i:1684912929;s:66:"D:\wamp64\www\shop\public/../application/admin\view\common\top.htm";i:1684920272;s:67:"D:\wamp64\www\shop\public/../application/admin\view\common\left.htm";i:1684912930;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:65:"D:\wamp64\www\shop\public/../application/admin\view\goods\add.htm";i:1684912929;s:66:"D:\wamp64\www\shop\public/../application/admin\view\common\top.htm";i:1694164483;s:67:"D:\wamp64\www\shop\public/../application/admin\view\common\left.htm";i:1684912930;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -70,7 +70,7 @@
                         <li>
                             <a class="login-area dropdown-toggle" data-toggle="dropdown">
                                 <div class="avatar" title="View your public profile">
-                                    <img src="__admin__//images/ji.jpg">
+                                    <img src="__admin__//images/th.jpg">
                                 </div>
                                 <section>
                                     <h2><span class="profile"><span>admin</span></span></h2>

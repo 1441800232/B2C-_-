@@ -95,7 +95,7 @@ class AlternateImg  extends Controller //继承 控制类
         //获取选中主键id里的img_src旧图
       $oidalternate_imgs=db('alternate_img')->field('img_src')->find($data['id']);
 // 获取旧图地 ，定一个常量然后在拼装上$oidalternate_imgs['img_src']旧图地址，就可以进行删除操作
-      $oidalternate_imgImg=IMG_UPLOAD.$oidalternate_imgs['img_src'];
+      $oidalternate_imgImg=IMG_UPLOADS.$oidalternate_imgs['img_src'];
       //进行删除操作
       if(file_exists($oidalternate_imgImg)){
         //易错符
@@ -134,17 +134,17 @@ class AlternateImg  extends Controller //继承 控制类
   public function del($id)
   {
 
-	  $alterImg=db('alternate_img');
-	  $alter_imgs=$alterImg->field('img_src')->find($id);
-	  if ($alter_imgs['img_src']){
-		  $imgSrc=IMG_UPLOAD.$alter_imgs['img_src'];
-		  if(file_exists($imgSrc)){
-			  @unlink($imgSrc);
-		  }
-	  }
+	  $alterImg=db('alternate_img')->field('img_src')->find($id);
+	  // 获取旧图地 ，定一个常量然后在拼装上$oidBrands['brand_img']旧图地址，就可以进行删除操作
+	  $imgSrc=IMG_UPLOADS.$alterImg['img_src'];
+	  //进行删除操作
+	  if(file_exists($imgSrc)){
+		  //易错符
+		  @unlink($imgSrc);
 
+	  }
     //绑定数据库表使用tp5里的方法删除
-    $del = $alterImg->delete($id);
+    $del = db('alternate_img')->delete($id);
     if ($del) {
       //添加成功有提示也跳转到lst界面
       $this->success('删除轮播图成功！', 'lst');
@@ -153,11 +153,6 @@ class AlternateImg  extends Controller //继承 控制类
     }
   }
 
-
-
-
-
-  
   //上传图片功能  tp 手册里
   public function upload()
   {
@@ -167,13 +162,10 @@ class AlternateImg  extends Controller //继承 控制类
     if ($file) {
       $info = $file->move(ROOT_PATH . 'public' . DS . 'static' . DS . 'uploads');
       if ($info) {
-		$img_Src = $info->getSaveName();
-		$img_Src =str_replace('\\','/',$img_Src);
-        return $img_Src;
+        return $info->getSaveName();
       } else {
         // 上传失败获取错误信息
         echo $file->getError();
-		die;
       }
     }
   }

@@ -29,9 +29,9 @@ class Goods extends Model //extends继承 控制类
                 $midThumb = date("Ymd") . DS . 'mid_' . $thumbName;//中图地址
                 $smThumb = date("Ymd") . DS . 'sm_' . $thumbName;//小图地址
                 $image = \think\Image::open(IMG_UPLOAD . $ogThumb);//原图 地址
-                $image->thumb(500, 500)->save(IMG_UPLOAD . $bigThumb);//大图地址
-                $image->thumb(240, 240)->save(IMG_UPLOAD . $midThumb);//中图地址
-                $image->thumb(58,58)->save(IMG_UPLOAD . $smThumb);//小图地址
+                $image->thumb(config('big_thumb_width'), config('big_thumb_height'))->save(IMG_UPLOAD . $bigThumb);//大图地址
+                $image->thumb(config('mid_thumb_width'), config('mid_thumb_height'))->save(IMG_UPLOAD . $midThumb);//中图地址
+                $image->thumb(config('sm_thumb_width'),  config('sm_thumb_height'))->save(IMG_UPLOAD . $smThumb);//小图地址
                 //把四类图片存放到数据库
                 $goods->og_thumb = $ogThumb;
                 $goods->big_thumb = $bigThumb;
@@ -147,10 +147,9 @@ class Goods extends Model //extends继承 控制类
                             $mid_photo = date("Ymd") . DS . 'mid_' . $photoName;//中图地址
                             $sm_photo = date("Ymd") . DS . 'sm_' . $photoName;//小图地址
                             $image = \think\Image::open(IMG_UPLOAD . $og_photo);//原图 地址
-                            $image->thumb(500, 500)->save(IMG_UPLOAD . $big_photo);//大图地址
-                            $image->thumb(200, 200)->save(IMG_UPLOAD . $mid_photo);//中图地址
-                            $image->thumb(80, 80)->save(IMG_UPLOAD . $sm_photo);//小图地址
-                            @unlink(IMG_UPLOAD . $og_photo);//删除原图 unlink — 删除文件(里面是路径)
+                            $image->thumb(config('big_thumb_width'),  config('big_thumb_height'))->save(IMG_UPLOAD . $big_photo);//大图地址
+                            $image->thumb(config('mid_thumb_width'),  config('mid_thumb_height'))->save(IMG_UPLOAD . $mid_photo);//中图地址
+                            $image->thumb(config('sm_thumb_width'),  config('sm_thumb_height'))->save(IMG_UPLOAD . $sm_photo);//小图地址
                             db('goods_photo')->insert(['goods_id' => $goodsID, 'og_photo' => $og_photo, 'big_photo' => $big_photo, 'mid_photo' => $mid_photo,
                                 'sm_photo' => $sm_photo]);
                         } else {
@@ -162,8 +161,6 @@ class Goods extends Model //extends继承 控制类
 
 
             }
-
-
             //批量写人会员价格
 //            dump($goods);die();
             //把会员价格数组拿出来 ， 在html界面设置了mp 是把会员价格放进去
@@ -205,9 +202,9 @@ class Goods extends Model //extends继承 控制类
                 $midThumb = date("Ymd") . DS . 'mid_' . $thumbName;//中图地址
                 $smThumb = date("Ymd") . DS . 'sm_' . $thumbName;//小图地址
                 $image = \think\Image::open(IMG_UPLOAD . $ogThumb);//原图 地址
-                $image->thumb(500, 500)->save(IMG_UPLOAD . $bigThumb);//大图地址
-                $image->thumb(200, 200)->save(IMG_UPLOAD . $midThumb);//中图地址
-                $image->thumb(80, 80)->save(IMG_UPLOAD . $smThumb);//小图地址
+                $image->thumb(config('big_thumb_width'),  config('big_thumb_height'))->save(IMG_UPLOAD . $bigThumb);//大图地址
+                $image->thumb(config('mid_thumb_width'),  config('mid_thumb_height'))->save(IMG_UPLOAD . $midThumb);//中图地址
+                $image->thumb(config('sm_thumb_width'),  config('sm_thumb_height'))->save(IMG_UPLOAD . $smThumb);//小图地址
                 //把四类图片存放到数据库
                 $goods->og_thumb = $ogThumb;
                 $goods->big_thumb = $bigThumb;

@@ -43,7 +43,7 @@
 						<ul>
 							{volist name = "cate.arts" id="art"}
 							<!--传递文章的id-->
-							<li><a href="{if condition="$art['link_url']"} {$art.link_url} {else/} {:url('Article/index',array('id'=>$art['id']))} {/if}" >{$art.title}</a></li>
+							<li><a href="{if condition="$art['link_url']"} {$art.link_url} {else/} {:url('index/Article/index',array('id'=>$art['id']))} {/if}" >{$art.title}</a></li>
 							{/volist}
 						</ul>
 					</div>

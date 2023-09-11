@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:73:"D:\wamp64\www\shop\public/../application/admin\view\member_level\list.htm";i:1684226129;s:66:"D:\wamp64\www\shop\public/../application/admin\view\common\top.htm";i:1684226129;s:67:"D:\wamp64\www\shop\public/../application/admin\view\common\left.htm";i:1684226236;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:73:"D:\wamp64\www\shop\public/../application/admin\view\member_level\list.htm";i:1684232731;s:66:"D:\wamp64\www\shop\public/../application/admin\view\common\top.htm";i:1687179963;s:67:"D:\wamp64\www\shop\public/../application/admin\view\common\left.htm";i:1684912930;}*/ ?>
 <!DOCml html>
 <html>
 
@@ -48,9 +48,16 @@
                 <div class="navbar-account">
                     <ul class="account-area">
                         <li>
+                            <a href="<?php echo url('Index/clearCache'); ?>" class="login-area dropdown-toggle" >
+                                <section>
+                                    <h2><span class="profile"><i class="menu-icon fa fa-trash-o">&nbsp;</i>清空缓存</span></h2>
+                                </section>
+                            </a>
+                        </li>
+                        <li>
                             <a class="login-area dropdown-toggle" data-toggle="dropdown">
                                 <div class="avatar" title="View your public profile">
-                                    <img src="__admin__//images/ji.jpg">
+                                    <img src="__admin__//images/th.jpg">
                                 </div>
                                 <section>
                                     <h2><span class="profile"><span>admin</span></span></h2>
@@ -154,19 +161,48 @@
             </a>
             <ul class="submenu">
                 <li>
-                    <a href="#">
+                    <a href="<?php echo url('Recpos/lst'); ?>">
                         <span class="menu-text">推荐位列表 </span>
                         <i class="menu-expand"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="<?php echo url('Recpos/add'); ?>">
                         <span class="menu-text">添加推荐位</span>
                         <i class="menu-expand"></i>
                     </a>
                 </li>
             </ul>
         </li>
+
+        <li>
+            <a href="#" class="menu-dropdown">
+                <i class="menu-icon fa  fa-random"></i>
+                <span class="menu-text">栏目关联信息</span>
+                <i class="menu-expand"></i>
+            </a>
+            <ul class="submenu">
+                <li>
+                    <a href="<?php echo url('CategoryWords/lst'); ?>">
+                        <span class="menu-text">推荐词关联</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo url('CategoryBrands/lst'); ?>">
+                        <span class="menu-text">品牌关联</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo url('CategoryAd/lst'); ?>">
+                        <span class="menu-text">左图品牌关联</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         <li>
             <a href="#" class="menu-dropdown">
                 <i class="menu-icon fa  fa-buysellads"></i>
@@ -339,7 +375,16 @@
                         <i class="menu-expand"></i>
                     </a>
                 </li>
+                <li>
+                    <a href="<?php echo url('AlternateImg/lst'); ?>">
+                        <span class="menu-text">首页轮播图管理</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                </li>
+
             </ul>
+
+
         </li>
         <li>
             <a href="#" class="menu-dropdown">

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:75:"D:\wamp64\www\shop\public/../application/admin\view\category_words\list.htm";i:1684232731;s:66:"D:\wamp64\www\shop\public/../application/admin\view\common\top.htm";i:1684232731;s:67:"D:\wamp64\www\shop\public/../application/admin\view\common\left.htm";i:1684822925;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:75:"D:\wamp64\www\shop\public/../application/admin\view\category_words\list.htm";i:1684912930;s:66:"D:\wamp64\www\shop\public/../application/admin\view\common\top.htm";i:1687179963;s:67:"D:\wamp64\www\shop\public/../application/admin\view\common\left.htm";i:1684912930;}*/ ?>
     <!DOCTYPE html>
 <html>
 
@@ -48,9 +48,16 @@
                 <div class="navbar-account">
                     <ul class="account-area">
                         <li>
+                            <a href="<?php echo url('Index/clearCache'); ?>" class="login-area dropdown-toggle" >
+                                <section>
+                                    <h2><span class="profile"><i class="menu-icon fa fa-trash-o">&nbsp;</i>清空缓存</span></h2>
+                                </section>
+                            </a>
+                        </li>
+                        <li>
                             <a class="login-area dropdown-toggle" data-toggle="dropdown">
                                 <div class="avatar" title="View your public profile">
-                                    <img src="__admin__//images/ji.jpg">
+                                    <img src="__admin__//images/th.jpg">
                                 </div>
                                 <section>
                                     <h2><span class="profile"><span>admin</span></span></h2>

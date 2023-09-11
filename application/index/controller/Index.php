@@ -6,6 +6,8 @@ class Index extends Base
 {
     public function index()
     {
+
+		//加密cookie
 		//调用公告及促销的文章(Notice:公告、Promotion:促销)给他们做缓存
 		//如果这个公告的缓存已经存在缓存了，我们就在缓存里面获取，如果没有就再去查询数据库
 		//公告

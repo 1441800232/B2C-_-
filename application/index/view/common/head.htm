@@ -3,11 +3,27 @@
 		<div class = "fl">
 
 			<div class = "txt-info" id = "ECS_MEMBERZONE">
-
-				<a href = "#" class = "link-login red">请登录</a>
-				<a href = "#" class = "link-regist">免费注册</a>
 				<div class="scrollBody" id="scrollBody"></div>
 			</div>
+			<script type="text/javascript">
+				$(function (){
+					$.ajax({
+						type: "GET",
+						url:"{:url('member/Account/checkLogin')}",
+						dataType: "json",
+						success: function (data){
+							if (data.error == 0){
+								var html = "<span>您好 &nbsp;<a href='#'>"+data.username+"</a></span> <span>，欢迎来到&nbsp;<a alt='首页' title='首页' href='index.php'>陈某商场</a></span><span>[<a href='{:url('member/User/loginOut')}'>退出</a>]</span><div class='scrollBody' id='scrollBody'></div>";
+								$('#ECS_MEMBERZONE').html(html);
+							}else {
+								var html ="<a href = '{:url('member/account/login')}'class = 'link-login red'>请登录</a> <a href = '{:url('member/account/reg')}' class = 'link-regist'>免费注册</a>";
+								$('#ECS_MEMBERZONE').html(html);
+
+							}
+						}
+					})
+				});
+			</script>
 		</div>
 		<ul class = "quick-menu fr">
 			{volist name="navRes.top" id="top_nav"}
@@ -64,7 +80,7 @@
 
 			<script type = "text/javascript">
 				//ajax异步获取顶级分类的子分类、品牌、频道等相关信息在右侧菜单的路径
-				var ajax_cate_url="{:url('Category/getCateInfo')}";
+				var ajax_cate_url="{:url('Category	/getCateInfo')}";
 				//在下拉菜单的加载中图片路径
 				var load_img="__index__/img/loadGoods.gif";
 				function changenum(rec_id, diff, warehouse_id, area_id) {

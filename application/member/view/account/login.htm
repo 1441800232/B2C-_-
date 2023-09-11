@@ -82,6 +82,10 @@ var new_password_empty = "<i class='iconfont icon-minus-sign'></i>请输入您�
 var confirm_password_empty = "<i class='iconfont icon-minus-sign'></i>请输入您的确认密码";
 var both_password_error = "<i class='iconfont icon-minus-sign'></i>您两次输入的密码不一致";
 </script>
+<script type="text/javascript">
+    var login_url = "{:url('member/Account/login')}";
+    var index = "{:url('index/Index/index')}";
+</script>
 </head>
 
 <body class="bg-ligtGary">
@@ -94,7 +98,7 @@ var both_password_error = "<i class='iconfont icon-minus-sign'></i>您两次输�
                     <b style="background:url(__index__/img/login_logo_pic.png) no-repeat;"></b>                </div>
             </div>
             <div class="header-href">
-                            <span>还没有账号<a href="{:url('account/reg')}" class="jump">免费注册</a></span>
+                            <span>还没有账号<a href="{:url('member/account/reg')}" class="jump">免费注册</a></span>
                         </div>
         </div>
     </div>
@@ -105,7 +109,7 @@ var both_password_error = "<i class='iconfont icon-minus-sign'></i>您两次输�
                     <div class="coagent">
                                             <div class="tit"><h3>用第三方账号直接登录</h3><span></span></div>
                         <div class="coagent-warp">
-                                                                                    <a href="user.php?act=oath&type=qq" class="qq"><b class="third-party-icon qq-icon"></b></a>
+                       <a href="user.php?act=oath&type=qq" class="qq"><b class="third-party-icon qq-icon"></b></a>
                                                                             </div>
                                         </div>
                     <div class="login-box">
@@ -114,7 +118,7 @@ var both_password_error = "<i class='iconfont icon-minus-sign'></i>您两次输�
                             <div class="msg-error" style="display:none">账户名与密码不匹配，请重新输入</div>
                         </div>
                         <div class="form">
-                            <form name="formLogin" action="user.php" method="post" onSubmit="userLogin();return false;">
+                            <form name="formLogin" action="" method="post" onSubmit="userLogin();return false;">
                                 <div class="item">
                                     <div class="item-info">
                                         <i class="iconfont icon-name"></i>
@@ -133,12 +137,9 @@ var both_password_error = "<i class='iconfont icon-minus-sign'></i>您两次输�
                                     <label for="remember" class="ui-label">请保存我这次的登录信息。</label>
                                 </div>
                                 <div class="item item-button">
-                                    <input type="hidden" name="dsc_token" value="d181014a3312a8a86c67ccff723ac5fd" autocomplete="off" />
-                                    <input type="hidden" name="act" value="act_login" autocomplete="off" />
-                                    <input type="hidden" name="back_act" value=".%2Findex.php" autocomplete="off" />
                                     <input type="submit" name="submit" id="loginSubmit" value="登&nbsp;&nbsp;录" class="btn sc-redBg-btn">
                                 </div>
-                                <a href="user.php?act=get_password" class="notpwd gary">忘记密码？</a>
+                                <a href="{:url('member/account/getpassword')}" class="notpwd gary">忘记密码？</a>
                             </form>
                         </div>
                     </div>

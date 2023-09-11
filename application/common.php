@@ -8,7 +8,25 @@
 // +----------------------------------------------------------------------
 // | Author: 流年 <liu21st@gmail.com>
 // +----------------------------------------------------------------------
-//图片资源处理函数
+
+
+//加密cookie
+
+function encryption($value,$type=0) {//type 0：加密 value 1：解密
+	$key =config('encryption_key');
+	if ($type == 0){
+		//加密
+		return str_replace('=','',base64_encode($value ^$key));
+	}else{
+		//解密
+		$value = base64_decode($value);
+		return $value ^ $key;
+	}
+
+	die();
+}
+
+
 //图片资源处理函数
 function my_scandir($dir=UEDITOR)
 {
@@ -30,7 +48,6 @@ function my_scandir($dir=UEDITOR)
     }
     return $files;
 }
-
 // 应用公共文件
 //PHP截取多余字符用省略号代替  字符串截取
 function cut_str($sourcestr,$cutlength)
