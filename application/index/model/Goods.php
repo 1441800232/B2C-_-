@@ -42,6 +42,7 @@ class Goods extends Model
 		return $goodsRes;
 	}
 
+	//获取商品会员价格
 	public function getMemberPrice($goods_id){
 		$levelId = session('level_id');//获取等级id
 		$levelRate= session('level_rate');//获取等级折扣率
@@ -68,6 +69,10 @@ class Goods extends Model
 	}
 
 
+	public function getShopPrice($goods_id){
+		$goodsInfo = db('goods')->field('shop_price')->find($goods_id);//本店价格
+		return	$goodsInfo['shop_price'];
+	}
 
 
 }

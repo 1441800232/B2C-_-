@@ -5,7 +5,7 @@ use think\Db;
 //引入系统的控制器类
 use think\Controller;
 
-class MemberLevel  extends Controller //继承 控制类
+class MemberLevel  extends Common //继承 控制类
 {   //会员级别列表
   public function lst()
   {

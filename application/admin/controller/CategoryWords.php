@@ -5,7 +5,7 @@ use think\Db;
 //引入系统的控制器类
 use think\Controller;
 
-class CategoryWords  extends Controller //继承 控制类
+class CategoryWords  extends Common //继承 控制类
 {   //关联词列表
   public function lst()
   {

@@ -5,7 +5,7 @@ use think\Db;
 //引入系统的控制器类
 use think\Controller;
 
-class CategoryAd  extends Controller //继承 控制类
+class CategoryAd  extends Common //继承 控制类
 {   //关联品牌列表
   public function lst()
   {

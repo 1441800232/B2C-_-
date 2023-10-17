@@ -14,6 +14,8 @@
 //
 define('APP_PATH', __DIR__ . '/../application/');
 define('UEDITOR',__DIR__.'/../../ueditor');
+define('PAY_PLUS', __DIR__ . '/../');
+
 define('HTTP_UEDITOR','/ueditor');
 define('DEL_UEDITOR',__DIR__.'/../.././');//    /.././是哪里拼装的和控制器Article里的$imgsrc拼装
 

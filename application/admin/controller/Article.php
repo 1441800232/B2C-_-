@@ -7,7 +7,7 @@ use think\Controller;
 //引入无线分级类
 use catetree\Catetree;
  //继承 控制类
-class article  extends Controller
+class article   extends Common
 {   //文章列表
   public function lst()
   {

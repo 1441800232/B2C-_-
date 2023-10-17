@@ -5,7 +5,7 @@ use think\Db;
 //引入系统的控制器类
 use think\Controller;
 
-class Attr  extends Controller //继承 控制类
+class Attr   extends Common //继承 控制类
 {   //商品类型列表
   public function lst()
   {

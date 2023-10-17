@@ -6,7 +6,7 @@ use think\Db;
 use think\Controller;
 use catetree\Catetree;
 
-class Cate  extends Controller //继承 控制类
+class Cate  extends Common //继承 控制类
 {   //品牌列表
   public function lst()
   {

@@ -159,11 +159,11 @@
 <script type="text/javascript">
     var ajax_add_to_cart ="{:url('index/Flow/addToCart')}";
     //购物车地址
-    var catr_url ="{:url('index/Flow/flow1')}"
+    var catr_url ="{:url('index/Flow/flow1')}";
 </script>
 <body>
 <!-- 头部 -->
-{include file='common/head_tip'}
+{include file='common/head'}
 <!-- /头部 -->
 <div class = "full-main-n">
     <div class = "w w1200 relative">
@@ -440,7 +440,7 @@
                         <div class = "choose-btns ml60 clearfix">
                             <a href = "javascript:bool=0;addToCart({$goodsInfo.id})" data-type = "0" class = "btn-buynow"
                                ectype = "btn-buynow">立即购买</a>
-                            <a href = "javascript:bool=0;addToCartShowDiv({$goodsInfo.id})" class = "btn-append"
+                            <a href = "javascript:bool=0;addToCartShowDiv({$goodsInfo.id});"  class = "btn-append"
                                ectype = "btn-append"><i class = "iconfont icon-carts"></i>加入购物车</a>
 
 

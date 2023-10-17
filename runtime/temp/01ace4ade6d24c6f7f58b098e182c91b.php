@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:65:"D:\wamp64\www\shop\public/../application/admin\view\type\list.htm";i:1684232731;s:66:"D:\wamp64\www\shop\public/../application/admin\view\common\top.htm";i:1687179963;s:67:"D:\wamp64\www\shop\public/../application/admin\view\common\left.htm";i:1684912930;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:65:"D:\wamp64\www\shop\public/../application/admin\view\type\list.htm";i:1684232731;s:66:"D:\wamp64\www\shop\public/../application/admin\view\common\top.htm";i:1697091390;s:67:"D:\wamp64\www\shop\public/../application/admin\view\common\left.htm";i:1697277080;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -60,19 +60,19 @@
                                     <img src="__admin__//images/th.jpg">
                                 </div>
                                 <section>
-                                    <h2><span class="profile"><span>admin</span></span></h2>
+                                    <h2><span class="profile"><span><?php echo \think\Session::get('uname'); ?></span></span></h2>
                                 </section>
                             </a>
                             <!--Login Area Dropdown-->
                             <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
                                 <li class="username"><a>David Stevenson</a></li>
                                 <li class="dropdown-footer">
-                                    <a href="/admin/user/logout.html">
+                                    <a href="<?php echo url('Admin/logout'); ?>">
                                             退出登录
                                         </a>
                                 </li>
                                 <li class="dropdown-footer">
-                                    <a href="/admin/user/changePwd.html">
+                                    <a href="<?php echo url('Admin/edit',array('id'=>\think\Session::get('id'))); ?>">
                                             修改密码
                                         </a>
                                 </li>
@@ -302,20 +302,41 @@
         </li>
         <li>
         <a href="#" class="menu-dropdown">
-            <i class="menu-icon fa fa-envelope"></i>
-            <span class="menu-text">  短信管理</span>
+            <i class="menu-icon fa fa-users"></i>
+            <span class="menu-text">管理员</span>
             <i class="menu-expand"></i>
         </a>
         <ul class="submenu">
             <li>
-                <a href="#">
-                    <span class="menu-text">发送短信 </span>
+                <a href="<?php echo url('Admin/lst'); ?>">
+                    <span class="menu-text">管理员列表 </span>
                     <i class="menu-expand"></i>
                 </a>
             </li>
             <li>
                 <a href="#">
                     <span class="menu-text">  短信签名 </span>
+                    <i class="menu-expand"></i>
+                </a>
+            </li>
+        </ul>
+    </li>
+        <li>
+        <a href="#" class="menu-dropdown">
+            <i class="menu-icon fa fa-th"></i>
+            <span class="menu-text">权限配置</span>
+            <i class="menu-expand"></i>
+        </a>
+        <ul class="submenu">
+            <li>
+                <a href="<?php echo url('AuthRule/lst'); ?>">
+                    <span class="menu-text">规则管理 </span>
+                    <i class="menu-expand"></i>
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo url('AuthGroup/lst'); ?>">
+                    <span class="menu-text">用户组管理 </span>
                     <i class="menu-expand"></i>
                 </a>
             </li>

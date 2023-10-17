@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:74:"D:\wamp64\www\shop\public/../application/admin\view\alternate_img\list.htm";i:1687226308;s:66:"D:\wamp64\www\shop\public/../application/admin\view\common\top.htm";i:1687179963;s:67:"D:\wamp64\www\shop\public/../application/admin\view\common\left.htm";i:1684912930;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:74:"D:\wamp64\www\shop\public/../application/admin\view\alternate_img\list.htm";i:1687226308;s:66:"D:\wamp64\www\shop\public/../application/admin\view\common\top.htm";i:1694164483;s:67:"D:\wamp64\www\shop\public/../application/admin\view\common\left.htm";i:1684912930;}*/ ?>
 <!DOCTYPE html>
 <html>
 

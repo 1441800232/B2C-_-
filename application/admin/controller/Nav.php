@@ -5,7 +5,7 @@ use think\Db;
 //引入系统的控制器类
 use think\Controller;
 
-class Nav  extends Controller //继承 控制类
+class Nav  extends Common //继承 控制类
 {   //品牌列表
 	public function lst()
 	{

@@ -1,0 +1,36 @@
+<div class = "site-nav" id = "site-nav">
+    <div class = "w w1390">
+        <div class = "fl">
+
+            <div class = "txt-info" id = "ECS_MEMBERZONE">
+                <div class="scrollBody" id="scrollBody"></div>
+            </div>
+            <script type="text/javascript">
+                $(function (){
+                    $.ajax({
+                        type: "GET",
+                        url:"{:url('member/Account/checkLogin')}",
+                        dataType: "json",
+                        success: function (data){
+                            if (data.error == 0){
+                                var html = "<span>您好 &nbsp;<a href='#'>"+data.username+"</a></span> <span>，欢迎来到&nbsp;<a alt='首页' title='首页' href='index.php'>陈某商场</a></span><span>[<a href='{:url('member/User/loginOut')}'>退出</a>]</span><div class='scrollBody' id='scrollBody'></div>";
+                                $('#ECS_MEMBERZONE').html(html);
+                            }else {
+                                var html ="<a href = '{:url('member/account/login')}'class = 'link-login red'>请登录</a> <a href = '{:url('member/account/reg')}' class = 'link-regist'>免费注册</a>";
+                                $('#ECS_MEMBERZONE').html(html);
+
+                            }
+                        }
+                    })
+                });
+            </script>
+        </div>
+        <ul class = "quick-menu fr">
+            {volist name="navRes.top" id="top_nav"}
+            <li>
+                <div class = "dt"><a {if condition="$top_nav['open'] eq 1"} target="_blank" {/if} href="{$top_nav.nav_url}">{$top_nav.nav_name}</a></div>
+            </li>
+            {/volist}
+        </ul>
+    </div>
+</div>

@@ -5,7 +5,7 @@ use think\Db;
 //引入系统的控制器类
 use think\Controller;
 
-class GoodsAttr  extends Controller //继承 控制类
+class GoodsAttr  extends Common //继承 控制类
 {   //商品类型列表
 
  //异步获取 指定类型下的属性

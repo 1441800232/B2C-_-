@@ -8,7 +8,7 @@ class User extends Model
 //	protected  $field = true;
 	//登入
 	//type=0说明需要为客户端返回json对象，type=1说明要为服务端返回普通数组类型
-	public function login($data,$type =0){
+	public function login($data,$type =0,$backAct='#'){
 		$userDate = array();
 		$userDate ['username']=trim($data['username']);//trim意思是不允许前后出现空格
 		$userDate ['password']=md5($data['password']);
@@ -17,9 +17,8 @@ class User extends Model
 		if ($users) {
 			if ($users['password'] === $userDate['password']) {
 				// 将用户信息存储到会话中
-				session('uid', $userDate['password']);
+				session('uid',$users['id']);
 				session('username', $userDate['username']);
-
 				// 获取用户积分并确定会员等级和折扣率
 				$points = $users['points'];
 				$memberLevel = db('member_level')->where('bom_point', '<=', $points)->where('top_point', '>=', $points)->find();
@@ -35,8 +34,10 @@ class User extends Model
 					cookie('password', $password, $aMonth, '/');
 				}
 				$response = [
+					//登入成功
 					'error' => 0,
 					'message' => "",
+					'url' =>$backAct
 				];
 			} else {
 				$response = [

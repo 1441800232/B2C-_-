@@ -5,7 +5,7 @@ use think\Db;
 //引入系统的控制器类
 use think\Controller;
 
-class Conf  extends Controller //继承 控制类
+class Conf  extends Common //继承 控制类
 {
 
     //配置项

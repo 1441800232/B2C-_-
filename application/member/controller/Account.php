@@ -47,6 +47,7 @@ class Account extends Base
 	public function login($type=0){//type=0说明需要为客户端返回json对象，type=1说明要为服务端返回普通数组类型
 		if (request()->isPost()){
 			$data = input('post.');
+//			$backAct = $data['back_act'];
 			return model('User')->login($data,$type);
 		}
 		return view();

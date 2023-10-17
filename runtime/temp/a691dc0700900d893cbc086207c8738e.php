@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:65:"D:\wamp64\www\shop\public/../application/index\view\cate\cate.htm";i:1684232731;s:67:"D:\wamp64\www\shop\public/../application/index\view\common\head.htm";i:1686541081;s:72:"D:\wamp64\www\shop\public/../application/index\view\common\cate_left.htm";i:1684232731;s:69:"D:\wamp64\www\shop\public/../application/index\view\common\footer.htm";i:1684232731;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:65:"D:\wamp64\www\shop\public/../application/index\view\cate\cate.htm";i:1684232731;s:67:"D:\wamp64\www\shop\public/../application/index\view\common\head.htm";i:1694939809;s:72:"D:\wamp64\www\shop\public/../application/index\view\common\cate_left.htm";i:1684232731;s:69:"D:\wamp64\www\shop\public/../application/index\view\common\footer.htm";i:1694164482;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -21,13 +21,24 @@ var load_icon = '<img src="__index__/img/load/load.gif" width="200" height="200"
 </script></head>
 <body class="bg-ligtGary">
 
+
+
+<script type="text/javascript" src="__index__/js/login.js"></script>
+
+<script>
+	var login_url="<?php echo url('member/Account/checkLogin'); ?>";
+	var logout_url="<?php echo url('member/User/logout'); ?>";
+	var cart_goods_num="<?php echo url('index/Flow/cartGoodsNum'); ?>";
+
+</script>
+
+
 <div class = "site-nav" id = "site-nav">
 	<div class = "w w1390">
 		<div class = "fl">
 
-
 			<div class = "txt-info" id = "ECS_MEMBERZONE">
-
+				<div class="scrollBody" id="scrollBody"></div>
 			</div>
 			<script type="text/javascript">
 				$(function (){
@@ -45,8 +56,10 @@ var load_icon = '<img src="__index__/img/load/load.gif" width="200" height="200"
 
 							}
 						}
-					})
+					});
+					cartGoodsNum();
 				});
+
 			</script>
 		</div>
 		<ul class = "quick-menu fr">
@@ -93,18 +106,16 @@ var load_icon = '<img src="__index__/img/load/load.gif" width="200" height="200"
 				<a href = "#">
 					<i class = "iconfont icon-carts"></i>
 					<span>我的购物车</span>
-					<em class = "count cart_num">0</em>
+					<em id="cart_goods_num" class = "count cart_num">0</em>
 				</a>
 			</div>
-			<div class = "dorpdown-layer" ectype = "dorpdownLayer">
-				<div class = "prompt">
-					<div class = "nogoods"><b></b><span>购物车中还没有商品，赶紧选购吧！</span></div>
-				</div>
-			</div>
+			<script type="text/javascript">
+
+			</script>
 
 			<script type = "text/javascript">
 				//ajax异步获取顶级分类的子分类、品牌、频道等相关信息在右侧菜单的路径
-				var ajax_cate_url="<?php echo url('Category/getCateInfo'); ?>";
+				var ajax_cate_url="<?php echo url('Category	/getCateInfo'); ?>";
 				//在下拉菜单的加载中图片路径
 				var load_img="__index__/img/loadGoods.gif";
 				function changenum(rec_id, diff, warehouse_id, area_id) {
@@ -351,7 +362,7 @@ function selectPage(sel)
 						<ul>
 							<?php if(is_array($cate['arts']) || $cate['arts'] instanceof \think\Collection || $cate['arts'] instanceof \think\Paginator): $i = 0; $__LIST__ = $cate['arts'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$art): $mod = ($i % 2 );++$i;?>
 							<!--传递文章的id-->
-							<li><a href="<?php if($art['link_url']): ?> <?php echo $art['link_url']; else: ?> <?php echo url('Article/index',array('id'=>$art['id'])); endif; ?>" ><?php echo $art['title']; ?></a></li>
+							<li><a href="<?php if($art['link_url']): ?> <?php echo $art['link_url']; else: ?> <?php echo url('index/Article/index',array('id'=>$art['id'])); endif; ?>" ><?php echo $art['title']; ?></a></li>
 							<?php endforeach; endif; else: echo "" ;endif; ?>
 						</ul>
 					</div>

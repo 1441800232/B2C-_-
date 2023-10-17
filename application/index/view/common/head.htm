@@ -1,3 +1,15 @@
+
+
+<script type="text/javascript" src="__index__/js/login.js"></script>
+
+<script>
+	var login_url="{:url('member/Account/checkLogin')}";
+	var logout_url="{:url('member/User/logout')}";
+	var cart_goods_num="{:url('index/Flow/cartGoodsNum')}";
+
+</script>
+
+
 <div class = "site-nav" id = "site-nav">
 	<div class = "w w1390">
 		<div class = "fl">
@@ -21,8 +33,10 @@
 
 							}
 						}
-					})
+					});
+					cartGoodsNum();
 				});
+
 			</script>
 		</div>
 		<ul class = "quick-menu fr">
@@ -69,14 +83,12 @@
 				<a href = "#">
 					<i class = "iconfont icon-carts"></i>
 					<span>我的购物车</span>
-					<em class = "count cart_num">0</em>
+					<em id="cart_goods_num" class = "count cart_num">0</em>
 				</a>
 			</div>
-			<div class = "dorpdown-layer" ectype = "dorpdownLayer">
-				<div class = "prompt">
-					<div class = "nogoods"><b></b><span>购物车中还没有商品，赶紧选购吧！</span></div>
-				</div>
-			</div>
+			<script type="text/javascript">
+
+			</script>
 
 			<script type = "text/javascript">
 				//ajax异步获取顶级分类的子分类、品牌、频道等相关信息在右侧菜单的路径

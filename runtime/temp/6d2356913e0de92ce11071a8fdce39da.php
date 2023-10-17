@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:73:"D:\wamp64\www\shop\public/../application/index\view\category\Category.htm";i:1684912930;s:67:"D:\wamp64\www\shop\public/../application/index\view\common\head.htm";i:1691138112;s:69:"D:\wamp64\www\shop\public/../application/index\view\common\footer.htm";i:1691138610;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:73:"D:\wamp64\www\shop\public/../application/index\view\category\Category.htm";i:1684912930;s:67:"D:\wamp64\www\shop\public/../application/index\view\common\head.htm";i:1694939809;s:69:"D:\wamp64\www\shop\public/../application/index\view\common\footer.htm";i:1694164482;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -146,6 +146,18 @@
 </head>
 <body>
 <!-- 头部 -->
+
+
+<script type="text/javascript" src="__index__/js/login.js"></script>
+
+<script>
+	var login_url="<?php echo url('member/Account/checkLogin'); ?>";
+	var logout_url="<?php echo url('member/User/logout'); ?>";
+	var cart_goods_num="<?php echo url('index/Flow/cartGoodsNum'); ?>";
+
+</script>
+
+
 <div class = "site-nav" id = "site-nav">
 	<div class = "w w1390">
 		<div class = "fl">
@@ -169,8 +181,10 @@
 
 							}
 						}
-					})
+					});
+					cartGoodsNum();
 				});
+
 			</script>
 		</div>
 		<ul class = "quick-menu fr">
@@ -217,18 +231,16 @@
 				<a href = "#">
 					<i class = "iconfont icon-carts"></i>
 					<span>我的购物车</span>
-					<em class = "count cart_num">0</em>
+					<em id="cart_goods_num" class = "count cart_num">0</em>
 				</a>
 			</div>
-			<div class = "dorpdown-layer" ectype = "dorpdownLayer">
-				<div class = "prompt">
-					<div class = "nogoods"><b></b><span>购物车中还没有商品，赶紧选购吧！</span></div>
-				</div>
-			</div>
+			<script type="text/javascript">
+
+			</script>
 
 			<script type = "text/javascript">
 				//ajax异步获取顶级分类的子分类、品牌、频道等相关信息在右侧菜单的路径
-				var ajax_cate_url="<?php echo url('Category/getCateInfo'); ?>";
+				var ajax_cate_url="<?php echo url('Category	/getCateInfo'); ?>";
 				//在下拉菜单的加载中图片路径
 				var load_img="__index__/img/loadGoods.gif";
 				function changenum(rec_id, diff, warehouse_id, area_id) {

@@ -11,7 +11,7 @@ use think\Controller;
 use catetree\Catetree;
 use think\Model;
 
-class Goods extends Controller //继承 控制类
+class Goods extends Common //继承 控制类
 {   //商品类型列表
     public function lst()
     {

@@ -43,6 +43,7 @@ class Goods extends Base
 			'radioAttrArr'=>$radioAttrArr,
 
 		]);
+
         return view('goods');
     }
 
