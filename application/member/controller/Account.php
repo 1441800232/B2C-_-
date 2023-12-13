@@ -32,6 +32,7 @@ class Account extends Base
 			$add = db('user')->insert($userDate);
 			if ($add){
 				$loginRes=$this->login($data,1);//登录成功后，自动登入系统
+				$loginRes = json_decode($loginRes->getContent(),true);
 				if($loginRes['error'] == 0){
 					$this->success("注册成功!正在为您跳转...",'member/User/index');
 				}else{
@@ -47,7 +48,12 @@ class Account extends Base
 	public function login($type=0){//type=0说明需要为客户端返回json对象，type=1说明要为服务端返回普通数组类型
 		if (request()->isPost()){
 			$data = input('post.');
-//			$backAct = $data['back_act'];
+			if (isset($data['back_act'])){
+				$backAct = $data['back_act'];
+
+			}else{
+				$backAct= '';
+			}
 			return model('User')->login($data,$type);
 		}
 		return view();
@@ -95,8 +101,8 @@ class Account extends Base
 			"50" => "内容含有敏感词"
 		);
 		$smsapi = "http://api.smsbao.com/";
-		$user = "***"; //短信平台帐号
-		$pass = md5("****"); //短信平台密码
+		$user = "chen_yu"; //短信平台帐号
+		$pass = md5("chy2868391465.."); //短信平台密码
 		$content=mt_rand(100000,999999);//要发送的短信内容
 		//type:0表示注册场景，1代表手机找回密码场景 ，2向用户发送密码
 		$tipMsg = '';
@@ -161,16 +167,16 @@ class Account extends Base
 				$mail->CharSet ="UTF-8";                     //设定邮件编码
 				$mail->SMTPDebug = 0;                        // 调试模式输出
 				$mail->isSMTP();                             // 使用SMTP
-				$mail->Host = 'smtp.qq.com';                // SMTP服务器
+				$mail->Host = 'smtp.163.com';                // SMTP服务器
 				$mail->SMTPAuth = TRUE;                      // 允许 SMTP 认证
 				$mail->FromName = 'PHP商城';
-				$mail->Username = '2868391465';                // SMTP 用户名  即邮箱的用户名
-				$mail->Password = '*****';             // SMTP 密码  部分邮箱是授权码(例如163邮箱)
+				$mail->Username = 'chyyhc2580@163.com';                // SMTP 用户名  即邮箱的用户名
+				$mail->Password = 'TKPYJGYCXDOMMIFG';             // SMTP 密码  部分邮箱是授权码(例如163邮箱)
 //				$mail->SMTPSecure = 'ssl';                    // 允许 TLS 或者ssl协议
 				$mail->Port = 25;                            // 服务器端口 25 或者465 具体要看邮箱服务器支持
-			$mail->SMTPDebug = 2;
+				$mail->SMTPDebug = 2;
 
-			$mail->setFrom('2868391465@qq.com', 'PHP商城');  //发件人
+			$mail->setFrom('chyyhc2580@163.com', 'PHP商城');  //发件人
 			$mail->addAddress($to);  // 收件人
 			//$mail->addAddress('ellen@example.com');  // 可添加多个收件人
 			//$mail->addCC('cc@example.com');                    //抄送
@@ -312,9 +318,8 @@ class Account extends Base
 				if ($update){
 					//修改密码成功
 					$_msg=$this->sendMail($userData['email'],$password);//接收新密码
-					$msg=json_decode($_msg,true);//转换城数组
-						$msg['status']=0;
-						$msg['msg']='修改密码成功！';
+					$msg['status']=0;
+					$msg['msg']='修改密码成功！';
 				}
 				else{
 					$msg['status']=3;

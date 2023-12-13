@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:76:"D:\wamp64\www\shop\public/../application/member\view\account\getpassword.htm";i:1691131864;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:76:"D:\wamp64\www\shop\public/../application/member\view\account\getpassword.htm";i:1694164483;}*/ ?>
 <!doctype html>
 <html>
 <head>

@@ -24,7 +24,6 @@ class User extends Model
 				$memberLevel = db('member_level')->where('bom_point', '<=', $points)->where('top_point', '>=', $points)->find();
 				session('level_id', $memberLevel['id']);//等级id
 				session('level_rate', $memberLevel['rate']);//等级折扣率
-
 				// 如果勾选了“记住我”，将凭据存储在 cookie 中以实现自动登录
 				if (isset($data['remember'])) {
 					$aMonth = 30 * 24 * 60 * 60; // 一个月的秒数
@@ -35,8 +34,8 @@ class User extends Model
 				}
 				$response = [
 					//登入成功
-					'error' => 0,
-					'message' => "",
+					'error' =>0,
+					'message' =>"",
 					'url' =>$backAct
 				];
 			} else {

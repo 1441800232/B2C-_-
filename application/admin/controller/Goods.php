@@ -156,6 +156,7 @@ class Goods extends Common //继承 控制类
 //		dump($myGoodsRecposRes);die();
         //查询当前商品拥有的商品属性的属性值 goods_attr
         $_gattrRes= db('goods_attr')->where('goods_id','=',$goodsId)->select();
+		  
 //        dump($_gattrRes);die();
         //更改二维数组结构 改为三维数组结构(打散成 三维数组)
         $gattrRes = array();

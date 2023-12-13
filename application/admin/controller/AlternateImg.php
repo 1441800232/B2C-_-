@@ -17,7 +17,7 @@ class AlternateImg  extends Common//继承 控制类
 		  foreach ($data['sort'] as $k => $v){
 			  $alternateImg->where('id', '=', $k)->update(['sort' => $v]);
 		  }
-		  $this->success('排序成功');
+		  $this->success('排序成功!');
 	  }
     //paginate是分页
     $alternate_imgRes = $alternateImg->order('sort DESC')->paginate(10);

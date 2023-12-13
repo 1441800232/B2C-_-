@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:68:"D:\wamp64\www\shop\public/../application/admin\view\article\list.htm";i:1684232731;s:66:"D:\wamp64\www\shop\public/../application/admin\view\common\top.htm";i:1697091390;s:67:"D:\wamp64\www\shop\public/../application/admin\view\common\left.htm";i:1697011183;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:68:"D:\wamp64\www\shop\public/../application/admin\view\article\list.htm";i:1684232731;s:66:"D:\wamp64\www\shop\public/../application/admin\view\common\top.htm";i:1697091390;s:67:"D:\wamp64\www\shop\public/../application/admin\view\common\left.htm";i:1697277080;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -316,6 +316,27 @@
             <li>
                 <a href="#">
                     <span class="menu-text">  短信签名 </span>
+                    <i class="menu-expand"></i>
+                </a>
+            </li>
+        </ul>
+    </li>
+        <li>
+        <a href="#" class="menu-dropdown">
+            <i class="menu-icon fa fa-th"></i>
+            <span class="menu-text">权限配置</span>
+            <i class="menu-expand"></i>
+        </a>
+        <ul class="submenu">
+            <li>
+                <a href="<?php echo url('AuthRule/lst'); ?>">
+                    <span class="menu-text">规则管理 </span>
+                    <i class="menu-expand"></i>
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo url('AuthGroup/lst'); ?>">
+                    <span class="menu-text">用户组管理 </span>
                     <i class="menu-expand"></i>
                 </a>
             </li>

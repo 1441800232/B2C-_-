@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:70:"D:\wamp64\www\shop\public/../application/admin\view\auth_rule\list.htm";i:1697273548;s:66:"D:\wamp64\www\shop\public/../application/admin\view\common\top.htm";i:1697091390;s:67:"D:\wamp64\www\shop\public/../application/admin\view\common\left.htm";i:1697098256;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:70:"D:\wamp64\www\shop\public/../application/admin\view\auth_rule\list.htm";i:1697273548;s:66:"D:\wamp64\www\shop\public/../application/admin\view\common\top.htm";i:1697091390;s:67:"D:\wamp64\www\shop\public/../application/admin\view\common\left.htm";i:1697277080;}*/ ?>
 <!DOCTYPE html>
 <html><head>
 	    <meta charset="utf-8">
@@ -338,7 +338,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="<?php echo url('AuthGroup/lst'); ?>">
                     <span class="menu-text">用户组管理 </span>
                     <i class="menu-expand"></i>
                 </a>
