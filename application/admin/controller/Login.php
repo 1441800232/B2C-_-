@@ -14,7 +14,7 @@ class Login  extends Controller
 {
 	public function index(){
 		if (session('uname') && session('id')){
-			$this->error('您已经登入成功，请勿重复登陆','Index/index');
+			$this->error('您已经登入成功，请勿重复登陆！','Index/index');
 		}
 
 		if(request()->isPost()){
