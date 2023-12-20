@@ -102,7 +102,7 @@ class Account extends Base
 		);
 		$smsapi = "http://api.smsbao.com/";
 		$user = "chen_yu"; //短信平台帐号
-		$pass = md5("chy2868391465.."); //短信平台密码
+		$pass = md5("短信平台密码"); //短信平台密码
 		$content=mt_rand(100000,999999);//要发送的短信内容
 		//type:0表示注册场景，1代表手机找回密码场景 ，2向用户发送密码
 		$tipMsg = '';
