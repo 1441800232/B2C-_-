@@ -55,7 +55,7 @@ class Admin  extends Common
 			}
 			$save = db('admin')->update($data);
 			if (!$save==false){
-				$this->success('修改管理员成！','lst');
+				$this->success('修改管理员成功！','lst');
 			}else{
 				$this->error('修改管理员失败');
 			}
