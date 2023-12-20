@@ -170,8 +170,8 @@ class Account extends Base
 				$mail->Host = 'smtp.163.com';                // SMTP服务器
 				$mail->SMTPAuth = TRUE;                      // 允许 SMTP 认证
 				$mail->FromName = 'PHP商城';
-				$mail->Username = 'chyyhc2580@163.com';                // SMTP 用户名  即邮箱的用户名
-				$mail->Password = 'TKPYJGYCXDOMMIFG';             // SMTP 密码  部分邮箱是授权码(例如163邮箱)
+				$mail->Username = 'chyc2580@163.com';                // SMTP 用户名  即邮箱的用户名
+				$mail->Password = '邮箱申请的SMYTP的密码';             // SMTP 密码  部分邮箱是授权码(例如163邮箱)
 //				$mail->SMTPSecure = 'ssl';                    // 允许 TLS 或者ssl协议
 				$mail->Port = 25;                            // 服务器端口 25 或者465 具体要看邮箱服务器支持
 				$mail->SMTPDebug = 2;
